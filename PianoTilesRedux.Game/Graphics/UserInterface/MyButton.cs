@@ -21,7 +21,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
             get => SpriteText?.Text ?? default;
             set
             {
-                if (SpriteText != null)
+                if (!(SpriteText is null))
                 {
                     SpriteText.Text = value;
                 }

@@ -57,23 +57,6 @@ namespace PianoTilesRedux.Game.Graphics
         }
     }
 
-    public static class MyFontExtensions
-    {
-        public static FontUsage With(
-            this FontUsage usage,
-            Typeface? typeface = null,
-            float? size = null,
-            FontWeight? weight = null,
-            bool? italics = null,
-            bool? fixedWidth = null
-        )
-        {
-            string familyString = typeface != null ? MyFont.GetFamilyString(typeface.Value) : usage.Family;
-            string weightString = weight != null ? MyFont.GetWeightString(familyString, weight.Value) : usage.Weight;
-            return usage.With(familyString, size, weightString, italics, fixedWidth);
-        }
-    }
-
     public enum Typeface
     {
         FuturaCondensed,
