@@ -1,6 +1,6 @@
 # Piano Tiles Redux
 
-[![CodeFactor](https://www.codefactor.io/repository/github/tastyfr/pianotiles-redux/badge)](https://www.codefactor.io/repository/github/tastyfr/pianotiles-redux)
+[![CodeFactor](https://www.codefactor.io/repository/github/tastyfr/pianotilesredux/badge)](https://www.codefactor.io/repository/github/tastyfr/pianotilesredux)
 
 Piano Tiles Redux is a fan-made rewrite of [Cheetah Games](https://en.wikipedia.org/wiki/Cheetah_Mobile)' original [Piano Tiles 2 game](https://en.wikipedia.org/wiki/Piano_Tiles_2) that attempts to recreate the design and gameplay, eventually, revive it.
 
