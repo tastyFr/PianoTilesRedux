@@ -21,8 +21,7 @@ namespace PianoTilesRedux.Game.Screens
         private SpinningSprite littleStarDisc;
         private SpriteText littleStarTitle;
         private MyButton startButton;
-        private SpriteIcon headphonesIcon;
-        private SpriteText headphonesText;
+        private FillFlowContainer headphonesTip;
 
         protected override void LoadComplete()
         {
@@ -83,9 +82,16 @@ namespace PianoTilesRedux.Game.Screens
                             Size = new Vector2(256, 64),
                             BackgroundColour = Color4.White.Opacity(.5f),
                             Y = 96,
-                            Action = startButton_OnClick,
+                            Action = () =>
+                            {
+                                if (startButton.Enabled.Value)
+                                {
+                                    startButton.Enabled.Value = false;
+                                    doTransition();
+                                }
+                            },
                         },
-                        new FillFlowContainer
+                        headphonesTip = new FillFlowContainer
                         {
                             AutoSizeAxes = Axes.Both,
                             Anchor = Anchor.BottomCentre,
@@ -94,7 +100,7 @@ namespace PianoTilesRedux.Game.Screens
                             Spacing = new Vector2(10),
                             Children = new Drawable[]
                             {
-                                headphonesIcon = new SpriteIcon
+                                new SpriteIcon
                                 {
                                     Anchor = Anchor.BottomCentre,
                                     Origin = Anchor.BottomCentre,
@@ -103,7 +109,7 @@ namespace PianoTilesRedux.Game.Screens
                                     Colour = Color4.White,
                                     Shadow = true,
                                 },
-                                headphonesText = new SpriteText
+                                new SpriteText
                                 {
                                     Text = @"Best with headphones",
                                     Shadow = true,
@@ -118,14 +124,13 @@ namespace PianoTilesRedux.Game.Screens
             };
         }
 
-        private void startButton_OnClick()
+        private void doTransition()
         {
             _ = yourFirstSong.MoveToOffset(new Vector2(0, -100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
             _ = littleStarDisc.FadeOut(500, Easing.OutQuint);
             _ = littleStarTitle.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
             _ = startButton.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
-            _ = headphonesIcon.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
-            _ = headphonesText.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
+            _ = headphonesTip.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
         }
     }
 }
