@@ -16,8 +16,8 @@ namespace PianoTilesRedux.Game.Graphics
             bool? fixedWidth = null
         )
         {
-            var familyString = typeface is null ? usage.Family : MyFont.GetFamilyString(typeface.Value);
-            var weightString = weight is null ? usage.Weight : MyFont.GetWeightString(familyString, weight.Value);
+            string familyString = typeface is null ? usage.Family : MyFont.GetFamilyString(typeface.Value);
+            string weightString = weight is null ? usage.Weight : MyFont.GetWeightString(familyString, weight.Value);
             return usage.With(familyString, size, weightString, italics, fixedWidth);
         }
     }
