@@ -18,7 +18,7 @@ namespace PianoTilesRedux.Game.Tests.Visual
 
         public TestSceneFirstTimeScreen()
         {
-            Add(new ScreenStack(new FirstTimeScreen()) { RelativeSizeAxes = Axes.Both });
+            Child = new ScreenStack(new FirstTimeScreen()) { RelativeSizeAxes = Axes.Both };
         }
     }
 }

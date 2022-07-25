@@ -8,25 +8,18 @@ using PianoTilesRedux.Game.Elements;
 namespace PianoTilesRedux.Game.Tests.Visual
 {
     [TestFixture]
-    public class TestSceneSpinningElement : PianoTilesReduxTestScene
+    public class TestSceneSpinningSprite : PianoTilesReduxTestScene
     {
-        // Add visual tests to ensure correct behaviour of your game:
-        // https://github.com/ppy/osu-framework/wiki/Development-and-Testing
-        // You can make changes to classes associated with the tests and they
-        // will recompile and update immediately.
-
-        public TestSceneSpinningElement()
+        public TestSceneSpinningSprite()
         {
-            Add(
-                new SpinningSprite
-                {
-                    Texture = @"LittleStar_Disc",
-                    Anchor = Anchor.Centre,
-                    NewRotation = 360,
-                    Duration = 10000,
-                    Loop = true,
-                }
-            );
+            Child = new SpinningSprite
+            {
+                Texture = @"LittleStar_Disc",
+                Anchor = Anchor.Centre,
+                NewRotation = 360,
+                Duration = 10000,
+                Loop = true,
+            };
         }
     }
 }
