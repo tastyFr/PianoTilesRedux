@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "PianoTilesRedux.sln",
+    "projects": [
+      "PianoTilesRedux.Desktop\\PianoTilesRedux.Desktop.csproj",
+      "PianoTilesRedux.Game.Tests\\PianoTilesRedux.Game.Tests.csproj",
+      "PianoTilesRedux.Game\\PianoTilesRedux.Game.csproj",
+      "PianoTilesRedux.Resources\\PianoTilesRedux.Resources.csproj"
+    ]
+  }
+}
