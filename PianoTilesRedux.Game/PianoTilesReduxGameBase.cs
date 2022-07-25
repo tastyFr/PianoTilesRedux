@@ -20,19 +20,28 @@ namespace PianoTilesRedux.Game
         [Resolved]
         private GameHost host { get; set; }
 
+        [Resolved]
+        private FrameworkConfigManager config { get; set; }
+
+        private SDL2DesktopWindow sdlWindow;
+
+        private readonly Size defaultSize = new Size(432, 768);
+
         protected PianoTilesReduxGameBase()
         {
-            base.Content.Add(
-                Content = new DrawSizePreservingFillContainer { TargetDrawSize = new Vector2(1366, 768) }
-            );
+            base.Content.Add(Content = new DrawSizePreservingFillContainer { TargetDrawSize = new Vector2(540, 960) });
         }
 
         [BackgroundDependencyLoader]
-        private void load(FrameworkConfigManager config)
+        private void load()
         {
             Resources.AddStore(new DllResourceStore(typeof(PianoTilesReduxResources).Assembly));
 
             host.Window.Title = "Piano Tiles Redux";
+
+            sdlWindow = (SDL2DesktopWindow)host.Window;
+            sdlWindow.MinSize = defaultSize;
+
             config.SetValue(FrameworkSetting.WindowedSize, new Size(1366, 768));
 
             addFonts();
