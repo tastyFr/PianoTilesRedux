@@ -36,8 +36,8 @@ To develop Piano Tiles Redux, please make sure you have the following prerequisi
 Clone the repository:
 
 ```shell
-git clone https://github.com/tastyFr/PianoTiles-Redux.git
-cd PianoTiles-Redux
+git clone https://github.com/tastyFr/PianoTilesRedux.git
+cd PianoTilesRedux
 ```
 
 To update the source code, run the following command:
