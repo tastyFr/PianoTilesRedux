@@ -1,62 +1,67 @@
-﻿// Piano Tiles Redux:
+// Piano Tiles Redux:
 // Made by tastyForReal (2022)
 
+using System;
 using NUnit.Framework;
+using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
 using osuTK.Graphics;
-using PianoTilesRedux.Game.Graphics;
 
 namespace PianoTilesRedux.Game.Tests.Visual
 {
     [TestFixture]
     public class TestScenePortraitScreen : PianoTilesReduxTestScene
     {
-        public TestScenePortraitScreen()
+        private SafeAreaDefiningContainer safeAreaContainer;
+        private SpriteText text;
+
+        [BackgroundDependencyLoader]
+        private void load()
         {
-            Child = new DrawSizePreservingFillContainer
+            RelativeSizeAxes = Axes.Both;
+            Child = safeAreaContainer = new SafeAreaDefiningContainer
             {
-                TargetDrawSize = new Vector2(540, 960),
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                Width = 1,
-                Height = .5f,
+                Anchor = Anchor.TopCentre,
+                Origin = Anchor.TopCentre,
                 Children = new Drawable[]
                 {
-                    new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.DarkBlue },
-                    new FillFlowContainer
+                    new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Violet },
+                    new Container
                     {
-                        AutoSizeAxes = Axes.Both,
-                        Anchor = Anchor.BottomCentre,
-                        Origin = Anchor.BottomCentre,
-                        Y = 170,
-                        Spacing = new Vector2(10),
+                        RelativeSizeAxes = Axes.Both,
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Masking = true,
+                        CornerRadius = 16,
+                        Width = .9f,
+                        Height = .15f,
                         Children = new Drawable[]
                         {
-                            new SpriteIcon
+                            new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.White },
+                            text = new SpriteText
                             {
-                                Anchor = Anchor.BottomCentre,
-                                Origin = Anchor.BottomCentre,
-                                Icon = FontAwesome.Solid.HeadphonesAlt,
-                                Size = new Vector2(32),
-                                Colour = Color4.White,
-                                Shadow = true,
-                            },
-                            new SpriteText
-                            {
-                                Text = @"Best with headphones",
-                                Shadow = true,
-                                Anchor = Anchor.BottomCentre,
-                                Origin = Anchor.BottomCentre,
-                                Font = MyFont.GetFont(size: 32),
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                Font = FrameworkFont.Regular.With(size: 48),
+                                Colour = Color4.Black,
+                                Truncate = true,
                             },
                         }
                     }
-                }
+                },
             };
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            var newSize = new Vector2(BoundingBox.Width, BoundingBox.Height);
+            safeAreaContainer.Size = new Vector2(Math.Min(newSize.Y / 16f * 9f, newSize.X), newSize.Y);
+            text.Text = $@"{(int)safeAreaContainer.Size.X}x{(int)safeAreaContainer.Size.Y}";
         }
     }
 }
