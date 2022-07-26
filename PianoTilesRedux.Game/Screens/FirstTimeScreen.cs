@@ -23,12 +23,6 @@ namespace PianoTilesRedux.Game.Screens
         private MyButton startButton;
         private FillFlowContainer headphonesTip;
 
-        protected override void LoadComplete()
-        {
-            base.LoadComplete();
-            startButton.Enabled.Value = true;
-        }
-
         [BackgroundDependencyLoader]
         private void load()
         {
@@ -90,6 +84,7 @@ namespace PianoTilesRedux.Game.Screens
                                     doTransition();
                                 }
                             },
+                            Enabled = { Value = true },
                         },
                         headphonesTip = new FillFlowContainer
                         {
