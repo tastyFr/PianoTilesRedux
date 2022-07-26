@@ -3,7 +3,6 @@
 
 using osu.Framework;
 using osu.Framework.Platform;
-using PianoTilesRedux.Game;
 
 namespace PianoTilesRedux.Desktop
 {
@@ -12,7 +11,7 @@ namespace PianoTilesRedux.Desktop
         public static void Main()
         {
             using GameHost host = Host.GetSuitableDesktopHost(@"PianoTilesRedux");
-            using osu.Framework.Game game = new PianoTilesReduxGame();
+            using osu.Framework.Game game = new PianoTilesReduxGameDesktop();
             host.Run(game);
         }
     }
