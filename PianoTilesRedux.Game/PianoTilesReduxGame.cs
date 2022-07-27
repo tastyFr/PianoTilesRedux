@@ -5,8 +5,10 @@ using System;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Shapes;
 using osu.Framework.Screens;
 using osuTK;
+using osuTK.Graphics;
 using PianoTilesRedux.Game.Elements;
 using PianoTilesRedux.Game.Screens;
 
@@ -27,7 +29,11 @@ namespace PianoTilesRedux.Game
                 {
                     Anchor = Anchor.TopCentre,
                     Origin = Anchor.TopCentre,
-                    Child = screen = new ScreenStack(new FirstTimeScreen()) { RelativeSizeAxes = Axes.Both }
+                    Children = new Drawable[]
+                    {
+                        new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Black },
+                        screen = new ScreenStack(new FirstTimeScreen()) { RelativeSizeAxes = Axes.Both }
+                    }
                 }
             );
         }
