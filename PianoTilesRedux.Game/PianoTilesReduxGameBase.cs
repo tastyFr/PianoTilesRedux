@@ -26,8 +26,12 @@ namespace PianoTilesRedux.Game
 
         private void addFonts()
         {
-            AddFont(Resources, @"Fonts/FuturaCondensed/FuturaCondensed-Regular");
-            AddFont(Resources, @"Fonts/Jua/Jua-Regular");
+            AddFont(Resources, "Fonts/FuturaCondensed/FuturaCondensed-Regular");
+            AddFont(Resources, "Fonts/Fredoka/Fredoka-Light");
+            AddFont(Resources, "Fonts/Fredoka/Fredoka-Regular");
+            AddFont(Resources, "Fonts/Fredoka/Fredoka-Medium");
+            AddFont(Resources, "Fonts/Fredoka/Fredoka-SemiBold");
+            AddFont(Resources, "Fonts/Fredoka/Fredoka-Bold");
         }
     }
 }
