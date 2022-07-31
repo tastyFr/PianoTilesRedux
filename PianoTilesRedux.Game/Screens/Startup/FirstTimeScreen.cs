@@ -13,14 +13,14 @@ using PianoTilesRedux.Game.Elements;
 using PianoTilesRedux.Game.Graphics;
 using PianoTilesRedux.Game.Graphics.UserInterface;
 
-namespace PianoTilesRedux.Game.Screens
+namespace PianoTilesRedux.Game.Screens.Startup
 {
     public class FirstTimeScreen : Screen
     {
         private SpriteText yourFirstSong;
         private SpinningSprite littleStarDisc;
         private SpriteText littleStarTitle;
-        private MyButton startButton;
+        private ReduxButton startButton;
         private FillFlowContainer headphonesTip;
 
         [BackgroundDependencyLoader]
@@ -28,7 +28,7 @@ namespace PianoTilesRedux.Game.Screens
         {
             InternalChildren = new Drawable[]
             {
-                new SpriteBackground { Background = @"LittleStar_Background" },
+                new SpriteBackground { Background = "LittleStar_Background" },
                 new DrawSizePreservingFillContainer
                 {
                     TargetDrawSize = new Vector2(540, 960),
@@ -40,15 +40,15 @@ namespace PianoTilesRedux.Game.Screens
                     {
                         yourFirstSong = new SpriteText
                         {
-                            Text = @"Start with your first song!",
+                            Text = "Start with your first song!",
                             Shadow = true,
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
-                            Font = MyFont.GetFont(size: 32),
+                            Font = ReduxFont.GetFont(),
                         },
                         littleStarDisc = new SpinningSprite
                         {
-                            Texture = @"LittleStar_Disc",
+                            Texture = "LittleStar_Disc",
                             NewRotation = 360,
                             Duration = 10000,
                             Anchor = Anchor.Centre,
@@ -57,13 +57,13 @@ namespace PianoTilesRedux.Game.Screens
                         },
                         littleStarTitle = new SpriteText
                         {
-                            Text = @"Little Star",
+                            Text = "Little Star",
                             Shadow = true,
                             Anchor = Anchor.BottomCentre,
                             Origin = Anchor.BottomCentre,
-                            Font = MyFont.GetFont(size: 64),
+                            Font = ReduxFont.GetFont(size: 64),
                         },
-                        startButton = new MyButton
+                        startButton = new ReduxButton
                         {
                             Anchor = Anchor.BottomCentre,
                             Origin = Anchor.BottomCentre,
@@ -72,18 +72,12 @@ namespace PianoTilesRedux.Game.Screens
                             BorderThickness = 3,
                             MaskingSmoothness = 1,
                             CornerRadius = 32,
-                            Text = "Play",
+                            Label = "Play",
                             Size = new Vector2(256, 64),
-                            BackgroundColour = Color4.White.Opacity(.5f),
+                            BackgroundColour = Color4.White.Opacity(0.5f),
+                            HoverColour = Color4.White.Opacity(0.75f),
                             Y = 96,
-                            Action = () =>
-                            {
-                                if (startButton.Enabled.Value)
-                                {
-                                    startButton.Enabled.Value = false;
-                                    doTransition();
-                                }
-                            },
+                            Action = doTransition,
                             Enabled = { Value = true },
                         },
                         headphonesTip = new FillFlowContainer
@@ -106,11 +100,11 @@ namespace PianoTilesRedux.Game.Screens
                                 },
                                 new SpriteText
                                 {
-                                    Text = @"Best with headphones",
+                                    Text = "Best with headphones",
                                     Shadow = true,
                                     Anchor = Anchor.BottomCentre,
                                     Origin = Anchor.BottomCentre,
-                                    Font = MyFont.GetFont(size: 32),
+                                    Font = ReduxFont.GetFont(size: 32),
                                 },
                             }
                         }
@@ -121,11 +115,25 @@ namespace PianoTilesRedux.Game.Screens
 
         private void doTransition()
         {
+            if (!startButton.Enabled.Value)
+            {
+                return;
+            }
+
+            startButton.Enabled.Value = false;
+
             _ = yourFirstSong.MoveToOffset(new Vector2(0, -100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
             _ = littleStarDisc.FadeOut(500, Easing.OutQuint);
             _ = littleStarTitle.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
             _ = startButton.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
             _ = headphonesTip.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
+        }
+
+        public override void OnEntering(ScreenTransitionEvent e)
+        {
+            base.OnEntering(e);
+
+            _ = this.FadeInFromZero(500, Easing.OutQuint);
         }
     }
 }
