@@ -5,16 +5,17 @@ using osu.Framework.Graphics.Sprites;
 
 namespace PianoTilesRedux.Game.Graphics
 {
-    public static class MyFont
+    public static class ReduxFont
     {
         public const float DEFAULT_SIZE = 32;
-
-        public static FontUsage Default => GetFont();
+        public static FontUsage Fredoka => GetFont();
         public static FontUsage Futura => GetFont(Typeface.FuturaCondensed, weight: FontWeight.Regular);
-        public static FontUsage Jua => GetFont(Typeface.Jua, weight: FontWeight.Regular);
 
+        /// <summary>
+        /// Gets the <see cref="FontUsage" /> for the given parameters.
+        /// </summary>
         public static FontUsage GetFont(
-            Typeface typeface = Typeface.Jua,
+            Typeface typeface = Typeface.Fredoka,
             float size = DEFAULT_SIZE,
             FontWeight weight = FontWeight.Regular,
             bool italics = false,
@@ -26,43 +27,59 @@ namespace PianoTilesRedux.Game.Graphics
                 familyString,
                 size,
                 GetWeightString(familyString, weight),
-                getItalics(italics),
+                getItalics(in italics),
                 fixedWidth
             );
         }
 
-        // Both fonts don't have italics, so we'll just return false for now.
+        // Fredoka and FuturaCondensed don't support italics, so we just return
+        // false for now.
         private static bool getItalics(in bool italics)
         {
             return false;
         }
 
+        /// <summary>
+        /// Gets the family string for the given typeface.
+        /// </summary>
         public static string GetFamilyString(Typeface typeface)
         {
-            return typeface switch
+            switch (typeface)
             {
-                Typeface.FuturaCondensed => @"FuturaCondensed",
-                Typeface.Jua => @"Jua",
-                _ => null,
-            };
+                case Typeface.FuturaCondensed:
+                    return "FuturaCondensed";
+                case Typeface.Fredoka:
+                    return "Fredoka";
+                default:
+                    return null;
+            }
         }
 
+        /// <summary>
+        /// Gets the weight string for the given family and weight.
+        /// </summary>
         public static string GetWeightString(string family, FontWeight weight)
         {
-            return
-                (family == GetFamilyString(Typeface.FuturaCondensed) || family == GetFamilyString(Typeface.Jua))
-                && weight != FontWeight.Regular
+            return family == GetFamilyString(Typeface.Fredoka) && weight == FontWeight.Black
                 ? FontWeight.Regular.ToString()
-                : weight.ToString();
+                : family == GetFamilyString(Typeface.FuturaCondensed) && weight != FontWeight.Regular
+                    ? FontWeight.Regular.ToString()
+                    : weight.ToString();
         }
     }
 
+    /// <summary>
+    /// The enum for the font's typeface.
+    /// </summary>
     public enum Typeface
     {
         FuturaCondensed,
-        Jua,
+        Fredoka,
     }
 
+    /// <summary>
+    /// The enum for the font's weight.
+    /// </summary>
     public enum FontWeight
     {
         Light = 300,

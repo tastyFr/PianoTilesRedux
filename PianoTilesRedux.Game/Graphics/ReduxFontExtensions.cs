@@ -5,7 +5,7 @@ using osu.Framework.Graphics.Sprites;
 
 namespace PianoTilesRedux.Game.Graphics
 {
-    public static class MyFontExtensions
+    public static class ReduxFontExtensions
     {
         public static FontUsage With(
             this FontUsage usage,
@@ -16,8 +16,10 @@ namespace PianoTilesRedux.Game.Graphics
             bool? fixedWidth = null
         )
         {
-            string familyString = typeface is null ? usage.Family : MyFont.GetFamilyString(typeface.Value);
-            string weightString = weight is null ? usage.Weight : MyFont.GetWeightString(familyString, weight.Value);
+            string familyString = typeface.HasValue ? ReduxFont.GetFamilyString(typeface.Value) : usage.Family;
+            string weightString = weight.HasValue
+                ? ReduxFont.GetWeightString(familyString, weight.Value)
+                : usage.Weight;
             return usage.With(familyString, size, weightString, italics, fixedWidth);
         }
     }
