@@ -10,7 +10,7 @@ namespace PianoTilesRedux.Desktop
     {
         public static void Main()
         {
-            using GameHost host = Host.GetSuitableDesktopHost(@"PianoTilesRedux");
+            using GameHost host = Host.GetSuitableDesktopHost("PianoTilesRedux");
             using osu.Framework.Game game = new PianoTilesReduxGameDesktop();
             host.Run(game);
         }
