@@ -107,7 +107,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 text =>
                 {
                     text.Font = ReduxFont.GetFont(size: 24, weight: FontWeight.SemiBold);
-                    text.Colour = Color4.White;
+                    text.Colour = Color4.SkyBlue;
                 }
             );
 
