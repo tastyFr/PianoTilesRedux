@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -140,8 +140,8 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup Label="Package References">
-    <PackageReference Include="ppy.osu.Framework" Version="2022.722.0" />
-    <PackageReference Include="ppy.osu.Framework.iOS" Version="2022.722.0" />
+    <PackageReference Include="ppy.osu.Framework" Version="2022.730.0" />
+    <PackageReference Include="ppy.osu.Framework.iOS" Version="2022.730.0" />
   </ItemGroup>
   <ItemGroup Label="Transitive Dependencies">
     <PackageReference Include="ppy.osu.Framework.NativeLibs" Version="2022.525.0" ExcludeAssets="all" />
