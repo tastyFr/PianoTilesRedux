@@ -30,8 +30,6 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
         private const float box_height = 128;
         private const float box_corner_radius = 24;
         private const float card_width = 84;
-        private const float screen_width = 540;
-        private const float screen_height = 960;
 
         private const int fade_duration = 250;
 
@@ -67,7 +65,7 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
 
-            Width = box_width / screen_width;
+            Width = box_width / PianoTilesReduxGame.SCREEN_WIDTH;
             Height = box_height;
 
             Masking = true;

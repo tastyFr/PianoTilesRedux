@@ -18,6 +18,9 @@ namespace PianoTilesRedux.Game
     {
         private SafeAreaDefiningContainer container;
 
+        public const float SCREEN_WIDTH = 540;
+        public const float SCREEN_HEIGHT = 960;
+
         [BackgroundDependencyLoader]
         private void load()
         {
@@ -33,7 +36,7 @@ namespace PianoTilesRedux.Game
                         new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Black },
                         new DrawSizePreservingFillContainer
                         {
-                            TargetDrawSize = new Vector2(540, 960),
+                            TargetDrawSize = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
                             Child = new ScreenStack(new Disclaimer()) { RelativeSizeAxes = Axes.Both }
                         }
                     }
