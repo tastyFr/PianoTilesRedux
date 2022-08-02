@@ -47,6 +47,7 @@ cd PianoTilesRedux
 Navigate to `PianoTilesRedux.Desktop` and run the following command:
 
 ```shell
+cd ./PianoTilesRedux.Desktop
 dotnet run
 ```
 
