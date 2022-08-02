@@ -33,9 +33,9 @@ To develop Piano Tiles Redux, please make sure you have the following prerequisi
 - If you are using Windows 7 or Windows 8, please make sure that you meet the [additional requirements](https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net60#dependencies), which you may need to install if your operating system is not up-to-date manually.
 - To support video decoding when running on Linux, please make sure you have a system-wide FFmpeg installation available.
 
-### Getting started
+## Getting started
 
-## I just want to run the game
+### I just want to run the game
 
 Clone the repository:
 
@@ -50,7 +50,7 @@ Navigate to `PianoTilesRedux.Desktop` and run the following command:
 dotnet run
 ```
 
-## I want to make changes to the game
+### I want to make changes to the game
 
 Anyone is welcome to contribute to this project. Feel free to open an issue or pull request.
 
