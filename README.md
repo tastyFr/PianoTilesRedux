@@ -41,7 +41,7 @@ Clone the repository:
 
 ```shell
 git clone https://github.com/tastyFr/PianoTilesRedux.git
-cd PianoTilesRedux
+cd ./PianoTilesRedux
 ```
 
 Navigate to `PianoTilesRedux.Desktop` and run the following command:
