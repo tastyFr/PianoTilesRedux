@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "PianoTilesRedux.sln",
+    "projects": [
+      "PianoTilesRedux.Android\\PianoTilesRedux.Android.csproj",
+      "PianoTilesRedux.Game\\PianoTilesRedux.Game.csproj",
+      "PianoTilesRedux.Resources\\PianoTilesRedux.Resources.csproj"
+    ]
+  }
+}
