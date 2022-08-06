@@ -115,10 +115,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
         {
             base.LoadComplete();
 
-            Enabled.BindValueChanged(
-                _ => this.TransformTo(nameof(Alpha), _.NewValue ? 1 : .5f, FadeDuration, Easing.OutQuint),
-                true
-            );
+            Enabled.BindValueChanged(_ => this.FadeTo(_.NewValue ? 1 : .5f, FadeDuration, Easing.OutQuint), true);
         }
 
         protected override bool OnMouseDown(MouseDownEvent e)
@@ -170,13 +167,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
                 RelativeSizeAxes = Axes.Both,
                 Children = new Drawable[]
                 {
-                    Background = new Box
-                    {
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        RelativeSizeAxes = Axes.Both,
-                        Colour = BackgroundColour,
-                    },
+                    Background = new Box { RelativeSizeAxes = Axes.Both, Colour = BackgroundColour },
                     SpriteText = Text
                 }
             };
