@@ -1,5 +1,5 @@
-name: Continuous Integration
 on: [push, pull_request]
+name: Continuous Integration
 
 jobs:
   build:
@@ -50,7 +50,7 @@ jobs:
           path: ${{github.workspace}}/TestResults/TestResults-Windows.trx
 
   build-only-android:
-    name: Build Only Android
+    name: Build only (Android)
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -69,7 +69,7 @@ jobs:
         run: msbuild PianoTilesRedux.Android/PianoTilesRedux.Android.csproj /restore -warnaserror -p:Configuration=Debug
 
   build-only-ios:
-    name: Build Only iOS
+    name: Build only (iOS)
     runs-on: macos-latest
     timeout-minutes: 60
     steps:
