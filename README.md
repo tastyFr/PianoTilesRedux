@@ -1,6 +1,6 @@
 # Piano Tiles Redux
 
-[![.NET](https://github.com/tastyFr/PianoTilesRedux/actions/workflows/dotnet.yml/badge.svg?branch=development)](https://github.com/tastyFr/PianoTilesRedux/actions/workflows/dotnet.yml)
+[![Continuous Integration](https://github.com/tastyFr/PianoTilesRedux/actions/workflows/dotnet.yml/badge.svg?branch=development)](https://github.com/tastyFr/PianoTilesRedux/actions/workflows/dotnet.yml)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/tastyfr/pianotilesredux/badge)](https://www.codefactor.io/repository/github/tastyfr/pianotilesredux)
 
