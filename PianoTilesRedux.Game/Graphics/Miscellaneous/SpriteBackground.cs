@@ -7,7 +7,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 
-namespace PianoTilesRedux.Game.Elements
+namespace PianoTilesRedux.Game.Graphics.Miscellaneous
 {
     public class SpriteBackground : Sprite
     {

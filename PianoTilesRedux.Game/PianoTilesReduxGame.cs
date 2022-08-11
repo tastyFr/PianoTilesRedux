@@ -9,7 +9,7 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
-using PianoTilesRedux.Game.Elements;
+using PianoTilesRedux.Game.Graphics.Miscellaneous;
 using PianoTilesRedux.Game.Screens.Startup;
 
 namespace PianoTilesRedux.Game

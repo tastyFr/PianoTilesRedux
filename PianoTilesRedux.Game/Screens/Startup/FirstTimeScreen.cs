@@ -9,8 +9,8 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
-using PianoTilesRedux.Game.Elements;
 using PianoTilesRedux.Game.Graphics;
+using PianoTilesRedux.Game.Graphics.Miscellaneous;
 using PianoTilesRedux.Game.Graphics.UserInterface;
 
 namespace PianoTilesRedux.Game.Screens.Startup
