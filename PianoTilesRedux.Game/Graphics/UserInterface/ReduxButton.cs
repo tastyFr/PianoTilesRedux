@@ -50,14 +50,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
             }
         }
 
-        /// <summary>
-        /// Whether the mouse is currently hovering over the button.
-        /// </summary>
         private bool hovering;
-
-        /// <summary>
-        /// Whether the button is currently being pressed.
-        /// </summary>
         private bool pressing;
 
         private static readonly Color4 default_background_color = Color4Extensions.FromHex("#15A0E1");
@@ -115,7 +108,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
         {
             base.LoadComplete();
 
-            Enabled.BindValueChanged(_ => this.FadeTo(_.NewValue ? 1 : .5f, FadeDuration, Easing.OutQuint), true);
+            Enabled.BindValueChanged(_ => this.FadeTo(_.NewValue ? 1 : 0.5f, FadeDuration, Easing.OutQuint), true);
         }
 
         protected override bool OnMouseDown(MouseDownEvent e)

@@ -69,8 +69,8 @@ namespace PianoTilesRedux.Game.Graphics.Miscellaneous
                             Masking = true,
                             CornerRadius = 25,
                             Padding = new MarginPadding { Vertical = 10, Horizontal = 3 },
-                            Width = .94f,
-                            Height = .8f,
+                            Width = 0.94f,
+                            Height = 0.8f,
                         },
                     }
                 },

@@ -35,7 +35,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     Width = 1,
-                    Height = .5f,
+                    Height = 0.5f,
                     Children = new Drawable[]
                     {
                         yourFirstSong = new SpriteText
