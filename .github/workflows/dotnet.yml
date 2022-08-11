@@ -2,29 +2,28 @@ name: .NET
 
 on:
   push:
-    branches: [ "development" ]
+    branches: ["development"]
   pull_request:
-    branches: [ "development" ]
+    branches: ["development"]
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build -c Debug -warnaserror PianoTilesRedux.Desktop.slnf
-    - name: Test
-      run: dotnet test --no-build --verbosity normal PianoTilesRedux.Desktop.slnf
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
-      with:
-        name: PianoTilesRedux-Windows
-        path: PianoTilesRedux.Desktop/bin/Debug/net6.0
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build -c Debug -warnaserror PianoTilesRedux.Desktop.slnf
+      - name: Test
+        run: dotnet test --no-build --verbosity normal PianoTilesRedux.Desktop.slnf
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: PianoTilesRedux-Windows
+          path: PianoTilesRedux.Desktop/bin/Debug/net6.0
