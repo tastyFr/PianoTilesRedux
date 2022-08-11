@@ -192,9 +192,6 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
 
             int starsCollected = totalStars % 4;
 
-            // When the number of the total stars is greater than 3, the player has
-            // collected crowns, so unlike stars, we need to add 1 to the number of
-            // the total stars to show the correct number of crowns.
             int crownsCollected = (totalStars % 4) + 1;
 
             int starsToTake = totalStars < 4 ? starsCollected : crownsCollected;
