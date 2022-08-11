@@ -33,12 +33,12 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
 
         private const int fade_duration = 250;
 
-        private readonly Color4 card_bg_color = new Color4(249, 177, 48, 255);
-        private readonly Color4 card_fg_color = new Color4(251, 208, 52, 255);
-        private readonly Color4 starcrown_uncounted_color = new Color4(224, 234, 244, 255);
-        private readonly Color4 starcrown_counted_color = new Color4(255, 200, 46, 255);
-        private readonly Color4 title_color = new Color4(33, 73, 98, 255);
-        private readonly Color4 artist_color = new Color4(172, 194, 206, 255);
+        private readonly Color4 card_bg_color = Color4Extensions.FromHex("##F9B130");
+        private readonly Color4 card_fg_color = Color4Extensions.FromHex("#FBD034");
+        private readonly Color4 starcrown_uncounted_color = Color4Extensions.FromHex("#E0EAF4");
+        private readonly Color4 starcrown_counted_color = Color4Extensions.FromHex("#FFC82E");
+        private readonly Color4 title_color = Color4Extensions.FromHex("#214962");
+        private readonly Color4 artist_color = Color4Extensions.FromHex("#ACC2CE");
 
         private Texture starTexture;
         private Texture crownTexture;

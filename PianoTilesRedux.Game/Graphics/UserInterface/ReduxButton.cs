@@ -60,7 +60,7 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
         /// </summary>
         private bool pressing;
 
-        private static readonly Color4 default_background_color = new Color4(21, 162, 225, 255);
+        private static readonly Color4 default_background_color = Color4Extensions.FromHex("#15A0E1");
 
         private Color4 backgroundColour = default_background_color;
 
