@@ -21,8 +21,8 @@ jobs:
       - name: Restore & Build
         run: msbuild PianoTilesRedux.Desktop.slnf /restore -warnaserror -p:Configuration=Debug
 
-  build-only-android:
-    name: Build only (Android)
+  build-android:
+    name: Build Android
     runs-on: windows-latest
     timeout-minutes: 60
     steps:
@@ -38,7 +38,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Restore & Build
-        run: msbuild PianoTilesRedux.Android/PianoTilesRedux.Android.csproj /restore -warnaserror -p:Configuration=Debug
+        run: msbuild PianoTilesRedux.Android/PianoTilesRedux.Android.csproj /restore -p:Configuration=Debug
 
   test:
     name: Test
