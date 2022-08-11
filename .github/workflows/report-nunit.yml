@@ -15,7 +15,7 @@ jobs:
       - name: Annotate CI run with test results
         uses: dorny/test-reporter@v1.5.0
         with:
-          artifact: TestResults-Windows
+          artifact: PianoTilesRedux-TestResults-Windows
           name: Test Results (Windows)
           path: "*.trx"
           reporter: dotnet-trx
