@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\**\*" />
     <EmbeddedResource Include="Samples\**\*" />
@@ -9,10 +9,10 @@
     <EmbeddedResource Include="Tracks\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Textures\LevelBackground_1stStar.png" />
-    <None Remove="Textures\LittleStar_Background.png" />
-    <None Remove="Textures\LittleStar_Disc.png" />
-    <None Remove="Textures\Splash_1.png" />
-    <None Remove="Textures\Splash_2.png" />
+    <None Remove="Textures\1stStarLevelBackground.png" />
+    <None Remove="Textures\LittleStarBackground.png" />
+    <None Remove="Textures\LittleStarDisc.png" />
+    <None Remove="Textures\Splash1.png" />
+    <None Remove="Textures\Splash2.png" />
   </ItemGroup>
 </Project>

@@ -28,7 +28,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
         {
             InternalChildren = new Drawable[]
             {
-                new SpriteBackground { Background = "LittleStar_Background" },
+                new SpriteBackground { Background = "LittleStarBackground" },
                 new DrawSizePreservingFillContainer
                 {
                     TargetDrawSize = new Vector2(540, 960),
@@ -48,7 +48,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                         },
                         littleStarDisc = new SpinningSprite
                         {
-                            Texture = "LittleStar_Disc",
+                            Texture = "LittleStarDisc",
                             NewRotation = 360,
                             Duration = 10000,
                             Anchor = Anchor.Centre,
