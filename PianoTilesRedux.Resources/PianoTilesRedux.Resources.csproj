@@ -8,11 +8,4 @@
     <EmbeddedResource Include="Textures\**\*" />
     <EmbeddedResource Include="Tracks\**\*" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Textures\1stStarLevelBackground.png" />
-    <None Remove="Textures\LittleStarBackground.png" />
-    <None Remove="Textures\LittleStarDisc.png" />
-    <None Remove="Textures\Splash1.png" />
-    <None Remove="Textures\Splash2.png" />
-  </ItemGroup>
 </Project>

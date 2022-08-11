@@ -1,19 +1,11 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
     {
       "label": "Build (Tests, Debug)",
       "type": "shell",
       "command": "dotnet",
-      "args": [
-        "build",
-        "-p:GenerateFullPaths=true",
-        "-m",
-        "-verbosity:m",
-        "PianoTilesRedux.Game.Tests"
-      ],
+      "args": ["build", "-p:GenerateFullPaths=true", "-m", "-verbosity:m", "PianoTilesRedux.Game.Tests"],
       "group": "build",
       "problemMatcher": "$msCompile",
       "presentation": {
@@ -42,13 +34,7 @@
       "label": "Build (Desktop, Debug)",
       "type": "shell",
       "command": "dotnet",
-      "args": [
-        "build",
-        "-p:GenerateFullPaths=true",
-        "-m",
-        "-verbosity:m",
-        "PianoTilesRedux.Desktop"
-      ],
+      "args": ["build", "-p:GenerateFullPaths=true", "-m", "-verbosity:m", "PianoTilesRedux.Desktop"],
       "group": "build",
       "problemMatcher": "$msCompile",
       "presentation": {
