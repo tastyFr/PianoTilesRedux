@@ -30,12 +30,11 @@ namespace PianoTilesRedux.Game.Screens.Startup
             InternalChildren = new Drawable[]
             {
                 new SpriteBackground { Background = "LittleStarBackground" },
-                new DrawSizePreservingFillContainer
+                new Container
                 {
-                    TargetDrawSize = new Vector2(540, 960),
+                    RelativeSizeAxes = Axes.Both,
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
-                    Width = 1,
                     Height = 0.5f,
                     Children = new Drawable[]
                     {
