@@ -15,7 +15,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
     public class Disclaimer : Screen
     {
         private const float warning_icon_size = 128;
-        private const float spacing_y = 171;
+        private const float padding = 16;
 
         private readonly Color4 warningIconColour = Color4.Yellow;
         private readonly Screen nextScreen = new FirstTimeScreen();
@@ -33,23 +33,31 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 Direction = FillDirection.Vertical,
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Spacing = new Vector2(0, spacing_y),
+                Width = 0.9f,
                 Children = new Drawable[]
                 {
-                    new SpriteIcon
+                    new Container
                     {
+                        AutoSizeAxes = Axes.Both,
                         Anchor = Anchor.Centre,
                         Origin = Anchor.Centre,
-                        Icon = FontAwesome.Solid.ExclamationTriangle,
-                        Size = new Vector2(warning_icon_size),
-                        Colour = warningIconColour
+                        Child = new SpriteIcon
+                        {
+                            Size = new Vector2(warning_icon_size),
+                            Anchor = Anchor.BottomCentre,
+                            Origin = Anchor.BottomCentre,
+                            Icon = FontAwesome.Solid.ExclamationTriangle,
+                            Colour = warningIconColour
+                        }
                     },
                     disclaimerText = new TextFlowContainer
                     {
-                        Width = 480,
-                        TextAnchor = Anchor.Centre,
+                        RelativeSizeAxes = Axes.X,
+                        AutoSizeAxes = Axes.Y,
                         Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre
+                        Origin = Anchor.Centre,
+                        Padding = new MarginPadding(padding),
+                        TextAnchor = Anchor.Centre,
                     }
                 }
             };
