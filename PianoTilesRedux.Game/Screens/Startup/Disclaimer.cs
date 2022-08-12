@@ -1,7 +1,6 @@
 // Piano Tiles Redux:
 // Made by tastyForReal (2022)
 
-using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
@@ -23,41 +22,39 @@ namespace PianoTilesRedux.Game.Screens.Startup
         private FillFlowContainer disclaimerContainer;
         private TextFlowContainer disclaimerText;
 
-        [BackgroundDependencyLoader]
-        private void load()
+        public Disclaimer()
         {
-            AddInternal(
-                disclaimerContainer = new FillFlowContainer
+            disclaimerContainer = new FillFlowContainer
+            {
+                Alpha = 0,
+                Scale = new Vector2(0.9f),
+                RelativeSizeAxes = Axes.X,
+                AutoSizeAxes = Axes.Y,
+                Direction = FillDirection.Vertical,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Spacing = new Vector2(0, spacing_y),
+                Children = new Drawable[]
                 {
-                    Alpha = 0,
-                    Scale = new Vector2(0.9f),
-                    RelativeSizeAxes = Axes.X,
-                    AutoSizeAxes = Axes.Y,
-                    Direction = FillDirection.Vertical,
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Spacing = new Vector2(0, spacing_y),
-                    Children = new Drawable[]
+                    new SpriteIcon
                     {
-                        new SpriteIcon
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre,
-                            Icon = FontAwesome.Solid.ExclamationTriangle,
-                            Size = new Vector2(warning_icon_size),
-                            Colour = warningIconColour
-                        },
-                        disclaimerText = new TextFlowContainer
-                        {
-                            Width = 480,
-                            TextAnchor = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre
-                        }
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre,
+                        Icon = FontAwesome.Solid.ExclamationTriangle,
+                        Size = new Vector2(warning_icon_size),
+                        Colour = warningIconColour
+                    },
+                    disclaimerText = new TextFlowContainer
+                    {
+                        Width = 480,
+                        TextAnchor = Anchor.Centre,
+                        Anchor = Anchor.Centre,
+                        Origin = Anchor.Centre
                     }
                 }
-            );
+            };
 
+            AddInternal(disclaimerContainer);
             setupDisclaimerText();
         }
 
@@ -70,6 +67,11 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 "Multithreading support means that even with low \"FPS\", your input and falling tiles in gameplay will be accurate.",
                 "Search songs by typing in the search bar while in the level selection screen.",
                 "Take a look under the hood at performance counters and enable verbose logging with CTRL-F2.",
+                "You will lose a life if you quit the level after you started.",
+                "You can change your skins in the settings menu.",
+                "In the level selection screen, you can sort levels by name, author, or difficulty.",
+                "Piano Tiles Redux has soundfonts support! You can add or remove soundfonts in the settings menu.",
+                "Add your favorite levels to your favorites collection by pressing the heart icon."
             };
 
             return tips[RNG.Next(0, tips.Length)];
@@ -129,6 +131,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 "Today's tip: ",
                 text => text.Font = ReduxFont.GetFont(size: 18, weight: FontWeight.SemiBold)
             );
+
             disclaimerText.NewParagraph();
             _ = disclaimerText.AddText(getRandomTip(), text => text.Font = ReduxFont.GetFont(size: 18));
         }

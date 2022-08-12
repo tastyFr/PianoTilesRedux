@@ -74,7 +74,7 @@ namespace PianoTilesRedux.Game.Graphics
     public enum Typeface
     {
         FuturaCondensed,
-        Fredoka,
+        Fredoka
     }
 
     /// <summary>
@@ -87,6 +87,6 @@ namespace PianoTilesRedux.Game.Graphics
         Medium = 500,
         SemiBold = 600,
         Bold = 700,
-        Black = 900,
+        Black = 900
     }
 }

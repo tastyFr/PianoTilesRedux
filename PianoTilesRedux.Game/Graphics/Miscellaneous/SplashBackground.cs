@@ -62,16 +62,16 @@ namespace PianoTilesRedux.Game.Graphics.Miscellaneous
                                             Texture = textures.Get("Splash2"),
                                             Scale = new Vector2(1.25f),
                                             Margin = new MarginPadding { Right = 25 },
-                                        },
-                                    },
-                                },
+                                        }
+                                    }
+                                }
                             },
                             Masking = true,
                             CornerRadius = 25,
                             Padding = new MarginPadding { Vertical = 10, Horizontal = 3 },
                             Width = 0.94f,
-                            Height = 0.8f,
-                        },
+                            Height = 0.8f
+                        }
                     }
                 },
             };

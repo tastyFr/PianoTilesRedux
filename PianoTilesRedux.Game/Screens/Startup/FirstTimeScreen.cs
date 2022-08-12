@@ -45,14 +45,14 @@ namespace PianoTilesRedux.Game.Screens.Startup
                             Shadow = true,
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
-                            Font = ReduxFont.GetFont(),
+                            Font = ReduxFont.GetFont()
                         },
                         littleStarDisc = new Sprite
                         {
                             Texture = textures.Get("LittleStarDisc"),
                             Anchor = Anchor.Centre,
                             Origin = Anchor.Centre,
-                            Scale = new Vector2(1.25f),
+                            Scale = new Vector2(1.25f)
                         },
                         littleStarTitle = new SpriteText
                         {
@@ -60,7 +60,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                             Shadow = true,
                             Anchor = Anchor.BottomCentre,
                             Origin = Anchor.BottomCentre,
-                            Font = ReduxFont.GetFont(size: 64),
+                            Font = ReduxFont.GetFont(size: 64)
                         },
                         startButton = new ReduxButton
                         {
@@ -77,7 +77,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                             HoverColour = Color4.White.Opacity(0.75f),
                             Y = 96,
                             Action = doTransition,
-                            Enabled = { Value = true },
+                            Enabled = { Value = true }
                         },
                         headphonesTip = new FillFlowContainer
                         {
@@ -104,11 +104,11 @@ namespace PianoTilesRedux.Game.Screens.Startup
                                     Anchor = Anchor.BottomCentre,
                                     Origin = Anchor.BottomCentre,
                                     Font = ReduxFont.GetFont(size: 32),
-                                },
+                                }
                             }
                         }
                     }
-                },
+                }
             };
 
             littleStarDisc.RotateTo(0).RotateTo(360, 10000).Loop();
