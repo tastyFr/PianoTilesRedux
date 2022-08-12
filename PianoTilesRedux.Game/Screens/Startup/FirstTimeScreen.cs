@@ -6,6 +6,7 @@ using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.Screens;
 using osuTK;
 using osuTK.Graphics;
@@ -18,13 +19,13 @@ namespace PianoTilesRedux.Game.Screens.Startup
     public class FirstTimeScreen : Screen
     {
         private SpriteText yourFirstSong;
-        private SpinningSprite littleStarDisc;
+        private Sprite littleStarDisc;
         private SpriteText littleStarTitle;
         private ReduxButton startButton;
         private FillFlowContainer headphonesTip;
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(TextureStore textures)
         {
             InternalChildren = new Drawable[]
             {
@@ -46,14 +47,12 @@ namespace PianoTilesRedux.Game.Screens.Startup
                             Origin = Anchor.TopCentre,
                             Font = ReduxFont.GetFont(),
                         },
-                        littleStarDisc = new SpinningSprite
+                        littleStarDisc = new Sprite
                         {
-                            Texture = "LittleStarDisc",
-                            NewRotation = 360,
-                            Duration = 10000,
+                            Texture = textures.Get("LittleStarDisc"),
                             Anchor = Anchor.Centre,
+                            Origin = Anchor.Centre,
                             Scale = new Vector2(1.25f),
-                            Loop = true,
                         },
                         littleStarTitle = new SpriteText
                         {
@@ -111,22 +110,28 @@ namespace PianoTilesRedux.Game.Screens.Startup
                     }
                 },
             };
+
+            littleStarDisc.RotateTo(0).RotateTo(360, 10000).Loop();
         }
 
         private void doTransition()
         {
-            if (!startButton.Enabled.Value)
+            if (startButton.Enabled.Value)
             {
-                return;
+                startButton.Enabled.Value = false;
+
+                _ = yourFirstSong
+                    .MoveToOffset(new Vector2(0, -100), 500, Easing.OutQuint)
+                    .FadeOut(500, Easing.OutQuint);
+                _ = littleStarDisc.FadeOut(500, Easing.OutQuint);
+                _ = littleStarTitle
+                    .MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint)
+                    .FadeOut(500, Easing.OutQuint);
+                _ = startButton.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
+                _ = headphonesTip
+                    .MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint)
+                    .FadeOut(500, Easing.OutQuint);
             }
-
-            startButton.Enabled.Value = false;
-
-            _ = yourFirstSong.MoveToOffset(new Vector2(0, -100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
-            _ = littleStarDisc.FadeOut(500, Easing.OutQuint);
-            _ = littleStarTitle.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
-            _ = startButton.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
-            _ = headphonesTip.MoveToOffset(new Vector2(0, 100), 500, Easing.OutQuint).FadeOut(500, Easing.OutQuint);
         }
 
         public override void OnEntering(ScreenTransitionEvent e)
