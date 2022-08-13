@@ -1,0 +1,11 @@
+path_classifiers:
+  test:
+    - "*/PianoTilesRedux.Game.Tests/**/*"
+
+extraction:
+  csharp:
+    index:
+      dotnet:
+        version: 6.0.400
+      build_command:
+        - dotnet build -c Debug -warnaserror PianoTilesRedux.Desktop.slnf
