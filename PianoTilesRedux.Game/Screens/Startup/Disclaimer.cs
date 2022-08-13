@@ -4,30 +4,44 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using osu.Framework.Utils;
 using osuTK;
 using osuTK.Graphics;
+using osuTK.Input;
 using PianoTilesRedux.Game.Graphics;
 
 namespace PianoTilesRedux.Game.Screens.Startup
 {
     public class Disclaimer : Screen
     {
+        private readonly Container content;
+
         private const float warning_icon_size = 128;
         private const float padding = 16;
 
         private readonly Color4 warningIconColour = Color4.Yellow;
         private readonly Screen nextScreen = new FirstTimeScreen();
-        private FillFlowContainer disclaimerContainer;
-        private TextFlowContainer disclaimerText;
+
+        private readonly FillFlowContainer disclaimerContent;
+        private readonly TextFlowContainer disclaimerText;
+
+        private readonly SpriteText tapToContinue;
 
         public Disclaimer()
         {
-            disclaimerContainer = new FillFlowContainer
+            content = new Container
             {
                 Alpha = 0,
+                RelativeSizeAxes = Axes.Both,
                 Scale = new Vector2(0.9f),
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre
+            };
+
+            disclaimerContent = new FillFlowContainer
+            {
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
                 Direction = FillDirection.Vertical,
@@ -62,7 +76,17 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 }
             };
 
-            AddInternal(disclaimerContainer);
+            tapToContinue = new SpriteText
+            {
+                Text = "Tap to continue",
+                Anchor = Anchor.BottomCentre,
+                Origin = Anchor.BottomCentre,
+                Y = -128,
+                Font = ReduxFont.GetFont(size: 24)
+            };
+
+            content.AddRange(new Drawable[] { disclaimerContent, tapToContinue });
+            AddInternal(content);
             setupDisclaimerText();
         }
 
@@ -144,14 +168,42 @@ namespace PianoTilesRedux.Game.Screens.Startup
             _ = disclaimerText.AddText(getRandomTip(), text => text.Font = ReduxFont.GetFont(size: 18));
         }
 
+        protected override void LoadComplete()
+        {
+            base.LoadComplete();
+
+            _ = tapToContinue.FadeInFromZero(500, Easing.OutSine).Then().FadeOutFromOne(500, Easing.InSine).Loop();
+        }
+
         public override void OnEntering(ScreenTransitionEvent e)
         {
             base.OnEntering(e);
 
-            disclaimerContainer
-                .FadeIn(500, Easing.OutQuint)
-                .ScaleTo(1, 500, Easing.OutQuint)
-                .Then(5000)
+            _ = content.FadeIn(500, Easing.OutQuint).ScaleTo(1, 500, Easing.OutQuint);
+        }
+
+        protected override bool OnClick(ClickEvent e)
+        {
+            exitThisScreen();
+
+            return true;
+        }
+
+        protected override bool OnKeyDown(KeyDownEvent e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Space)
+            {
+                exitThisScreen();
+            }
+
+            return true;
+        }
+
+        private void exitThisScreen()
+        {
+            tapToContinue.Hide();
+            content
+                .DelayUntilTransformsFinished()
                 .FadeOut(500, Easing.InQuint)
                 .ScaleTo(0.9f, 500, Easing.InQuint)
                 .Finally(_ => Scheduler.AddDelayed(() => this.Push(nextScreen), 250));

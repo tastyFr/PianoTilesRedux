@@ -110,7 +110,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 }
             };
 
-            littleStarDisc.RotateTo(0).RotateTo(360, 10000).Loop();
+            _ = littleStarDisc.RotateTo(0).RotateTo(360, 10000).Loop();
         }
 
         private void doTransition()
