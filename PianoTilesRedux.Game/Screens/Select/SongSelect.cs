@@ -19,16 +19,17 @@ namespace PianoTilesRedux.Game.Screens.Select
     public class SongSelect : Screen
     {
         private FillFlowContainer carouselContainer;
+        private Box box;
 
-        private const string title = "This level has an incredibly and implausibly long title!";
-        private const string artist = "And the artist! Who would have thought that the artist would be this long?";
+        private const string title = "This screen is experimental; it will be updated as more features are added.";
+        private const string artist = "Please don't expect this to be perfect. Thanks for your patience!";
 
         [BackgroundDependencyLoader]
         private void load()
         {
             InternalChildren = new Drawable[]
             {
-                new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Violet },
+                box = new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Violet },
                 // Scroll container for all the levels
                 new ReduxScrollContainer
                 {
@@ -43,7 +44,7 @@ namespace PianoTilesRedux.Game.Screens.Select
                             Direction = FillDirection.Vertical,
                             Spacing = new Vector2(0, 10),
                             ChildrenEnumerable = Enumerable
-                                .Range(0, 100)
+                                .Range(0, 25)
                                 .Select(
                                     _ =>
                                         new LevelCarousel

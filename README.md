@@ -11,6 +11,8 @@ This project is under heavy development, is currently in the early stages of dev
 
 `README.md` is a work in progress, and is not yet complete.
 
+Refactoring and cleanup will be done in the future after an alpha release.
+
 ## Features
 
 Piano Tiles Redux adds the following features that are not present in the original game:

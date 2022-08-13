@@ -14,7 +14,9 @@ namespace PianoTilesRedux.Game.Tests
         {
             base.LoadComplete();
 
-            AddRange(new Drawable[] { new TestBrowser("PianoTilesRedux"), new CursorContainer() });
+            var testBrowser = new TestBrowser("PianoTilesRedux");
+            var cursorContainer = new CursorContainer();
+            AddRange(new Drawable[] { testBrowser, cursorContainer });
         }
 
         public override void SetHost(GameHost host)

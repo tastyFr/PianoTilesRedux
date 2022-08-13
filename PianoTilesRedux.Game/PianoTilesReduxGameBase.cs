@@ -14,7 +14,8 @@ namespace PianoTilesRedux.Game
         [BackgroundDependencyLoader]
         private void load(FrameworkConfigManager config)
         {
-            Resources.AddStore(new DllResourceStore(typeof(PianoTilesReduxResources).Assembly));
+            using var store = new DllResourceStore(typeof(PianoTilesReduxResources).Assembly);
+            Resources.AddStore(store);
 
             // Always set these values at the start of the game.
             config.SetValue(FrameworkSetting.WindowedSize, new Size(1366, 768));

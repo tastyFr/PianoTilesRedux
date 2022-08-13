@@ -53,6 +53,13 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
         public string Index;
         public SpriteText LevelNumber;
 
+        private SpriteText musicArtistText;
+        private SpriteText musicTitleText;
+        private Box boxCard;
+        private Container container;
+        private Box boxCoverCard;
+        private ReduxButton playButton;
+
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
@@ -79,96 +86,101 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
                 Radius = 8,
             };
 
-            Children = new Drawable[]
+            boxCard = new Box
             {
-                new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.White },
-                new Container
-                {
-                    RelativeSizeAxes = Axes.Both,
-                    Width = card_width / box_width,
-                    Children = new Drawable[]
-                    {
-                        new Box
-                        {
-                            Name = "Rounded Box",
-                            RelativeSizeAxes = Axes.Both,
-                            Anchor = Anchor.CentreLeft,
-                            Origin = Anchor.CentreLeft,
-                            Colour = card_bg_color
-                        },
-                        LevelNumber = new SpriteText
-                        {
-                            Name = "Level Index",
-                            Width = 64,
-                            Colour = Color4.White,
-                            Anchor = Anchor.TopLeft,
-                            Origin = Anchor.TopLeft,
-                            Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
-                            Padding = new MarginPadding { Left = 18, Top = 8 },
-                            Truncate = true
-                        },
-                        new SpriteText
-                        {
-                            Name = "Music Title",
-                            Width = 420,
-                            Text = Title,
-                            Colour = title_color,
-                            Anchor = Anchor.TopLeft,
-                            Origin = Anchor.TopLeft,
-                            Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
-                            Padding = new MarginPadding { Left = 100, Top = 8 },
-                            Truncate = true
-                        },
-                        new SpriteText
-                        {
-                            Name = "Music Artist",
-                            Width = 420,
-                            Text = Artist,
-                            Colour = artist_color,
-                            Anchor = Anchor.TopLeft,
-                            Origin = Anchor.TopLeft,
-                            Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
-                            Padding = new MarginPadding { Left = 100, Top = 40 },
-                            Truncate = true
-                        },
-                        levelCard = new Sprite
-                        {
-                            Name = "Level Card",
-                            RelativeSizeAxes = Axes.Both,
-                            Anchor = Anchor.BottomRight,
-                            Origin = Anchor.BottomRight,
-                            Colour = card_fg_color,
-                            FillMode = FillMode.Fit,
-                            Scale = new Vector2(0.75f),
-                        },
-                        stars = new FillFlowContainer<Sprite>
-                        {
-                            Name = "Stars",
-                            RelativeSizeAxes = Axes.Both,
-                            Anchor = Anchor.BottomLeft,
-                            Origin = Anchor.BottomLeft,
-                            Direction = FillDirection.Horizontal,
-                            Spacing = new Vector2(4, 0),
-                            Margin = new MarginPadding { Left = 102, Bottom = 10 },
-                            ChildrenEnumerable = Enumerable.Range(0, 3).Select(_ => createStar())
-                        },
-                    }
-                },
-                new ReduxButton
-                {
-                    Name = "Play Button",
-                    Enabled = { Value = true },
-                    Size = new Vector2(150, 50),
-                    Anchor = Anchor.BottomRight,
-                    Origin = Anchor.BottomRight,
-                    Margin = new MarginPadding { Right = 15, Bottom = 10 },
-                    Masking = true,
-                    CornerRadius = 24,
-                    FontUsage = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 36),
-                    Label = "Play",
-                    Action = () => totalStars = Math.Clamp(++totalStars, 0, 6)
-                }
+                Name = "Box Card",
+                RelativeSizeAxes = Axes.Both,
+                Anchor = Anchor.CentreLeft,
+                Origin = Anchor.CentreLeft,
+                Colour = card_bg_color
             };
+
+            musicTitleText = new SpriteText
+            {
+                Name = "Music Title",
+                Width = 420,
+                Text = Title,
+                Colour = title_color,
+                Anchor = Anchor.TopLeft,
+                Origin = Anchor.TopLeft,
+                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
+                Padding = new MarginPadding { Left = 100, Top = 8 },
+                Truncate = true
+            };
+
+            musicArtistText = new SpriteText
+            {
+                Name = "Music Artist",
+                Width = 420,
+                Text = Artist,
+                Colour = artist_color,
+                Anchor = Anchor.TopLeft,
+                Origin = Anchor.TopLeft,
+                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
+                Padding = new MarginPadding { Left = 100, Top = 40 },
+                Truncate = true
+            };
+
+            LevelNumber = new SpriteText
+            {
+                Name = "Level Index",
+                Width = 64,
+                Colour = Color4.White,
+                Anchor = Anchor.TopLeft,
+                Origin = Anchor.TopLeft,
+                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
+                Padding = new MarginPadding { Left = 18, Top = 8 },
+                Truncate = true
+            };
+
+            levelCard = new Sprite
+            {
+                Name = "Level Card",
+                RelativeSizeAxes = Axes.Both,
+                Anchor = Anchor.BottomRight,
+                Origin = Anchor.BottomRight,
+                Colour = card_fg_color,
+                FillMode = FillMode.Fit,
+                Scale = new Vector2(0.75f),
+            };
+
+            stars = new FillFlowContainer<Sprite>
+            {
+                Name = "Stars",
+                RelativeSizeAxes = Axes.Both,
+                Anchor = Anchor.BottomLeft,
+                Origin = Anchor.BottomLeft,
+                Direction = FillDirection.Horizontal,
+                Spacing = new Vector2(4, 0),
+                Margin = new MarginPadding { Left = 102, Bottom = 10 },
+                ChildrenEnumerable = Enumerable.Range(0, 3).Select(_ => createStar())
+            };
+
+            container = new Container
+            {
+                RelativeSizeAxes = Axes.Both,
+                Width = card_width / box_width,
+                Children = new Drawable[] { boxCard, LevelNumber, musicTitleText, musicArtistText, levelCard, stars, }
+            };
+
+            boxCoverCard = new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.White };
+
+            playButton = new ReduxButton
+            {
+                Name = "Play Button",
+                Enabled = { Value = true },
+                Size = new Vector2(150, 50),
+                Anchor = Anchor.BottomRight,
+                Origin = Anchor.BottomRight,
+                Margin = new MarginPadding { Right = 15, Bottom = 10 },
+                Masking = true,
+                CornerRadius = 24,
+                FontUsage = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 36),
+                Label = "Play",
+                Action = () => totalStars = Math.Clamp(++totalStars, 0, 6)
+            };
+
+            Children = new Drawable[] { boxCoverCard, container, playButton };
         }
 
         private Sprite createStar()

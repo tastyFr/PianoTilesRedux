@@ -17,6 +17,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
     public class Disclaimer : Screen
     {
         private readonly Container content;
+        private readonly Container containerWarningIcon;
 
         private const float warning_icon_size = 128;
         private const float padding = 16;
@@ -40,6 +41,21 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 Origin = Anchor.Centre
             };
 
+            containerWarningIcon = new Container
+            {
+                AutoSizeAxes = Axes.Both,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Child = new SpriteIcon
+                {
+                    Size = new Vector2(warning_icon_size),
+                    Anchor = Anchor.BottomCentre,
+                    Origin = Anchor.BottomCentre,
+                    Icon = FontAwesome.Solid.ExclamationTriangle,
+                    Colour = warningIconColour
+                }
+            };
+
             disclaimerContent = new FillFlowContainer
             {
                 RelativeSizeAxes = Axes.X,
@@ -50,20 +66,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 Width = 0.9f,
                 Children = new Drawable[]
                 {
-                    new Container
-                    {
-                        AutoSizeAxes = Axes.Both,
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Child = new SpriteIcon
-                        {
-                            Size = new Vector2(warning_icon_size),
-                            Anchor = Anchor.BottomCentre,
-                            Origin = Anchor.BottomCentre,
-                            Icon = FontAwesome.Solid.ExclamationTriangle,
-                            Colour = warningIconColour
-                        }
-                    },
+                    containerWarningIcon,
                     disclaimerText = new TextFlowContainer
                     {
                         RelativeSizeAxes = Axes.X,
