@@ -1,0 +1,47 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["csharp"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Install .NET 6.0.x
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Build
+        run: |
+          dotnet --info
+          dotnet clean ./PianoTilesRedux.Desktop.slnf
+          dotnet restore ./PianoTilesRedux.Desktop.slnf
+          dotnet build --no-incremental -warnaserror /p:UseSharedCompilation=false /p:Configuration=Debug ./PianoTilesRedux.Desktop.slnf
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
