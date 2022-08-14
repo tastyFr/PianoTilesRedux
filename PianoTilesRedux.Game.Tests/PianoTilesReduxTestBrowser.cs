@@ -10,12 +10,15 @@ namespace PianoTilesRedux.Game.Tests
 {
     public class PianoTilesReduxTestBrowser : PianoTilesReduxGameBase
     {
+        private TestBrowser testBrowser;
+        private CursorContainer cursorContainer;
+
         protected override void LoadComplete()
         {
             base.LoadComplete();
 
-            var testBrowser = new TestBrowser("PianoTilesRedux");
-            var cursorContainer = new CursorContainer();
+            testBrowser = new TestBrowser("PianoTilesRedux");
+            cursorContainer = new CursorContainer();
             AddRange(new Drawable[] { testBrowser, cursorContainer });
         }
 
