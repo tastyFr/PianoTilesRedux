@@ -16,10 +16,10 @@ namespace PianoTilesRedux.Game
 {
     public class PianoTilesReduxGame : PianoTilesReduxGameBase
     {
-        private SafeAreaDefiningContainer container;
+        private Container container;
 
         private Box box;
-        private DrawSizePreservingFillContainer drawSizePreservingFillContainer;
+        private DrawSizePreservingFillContainer containerScreen;
 
         public const float SCREEN_WIDTH = 540;
         public const float SCREEN_HEIGHT = 960;
@@ -31,19 +31,19 @@ namespace PianoTilesRedux.Game
 
             box = new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.Black };
 
-            drawSizePreservingFillContainer = new DrawSizePreservingFillContainer
+            containerScreen = new DrawSizePreservingFillContainer
             {
                 TargetDrawSize = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
                 Child = new ScreenStack(new Disclaimer()) { RelativeSizeAxes = Axes.Both }
             };
 
             base.AddInternal(
-                // A safe area container is defined here for the portrait screen.
-                container = new SafeAreaDefiningContainer
+                container = new Container
                 {
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
-                    Children = new Drawable[] { box, drawSizePreservingFillContainer }
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
+                    Size = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
+                    Children = new Drawable[] { box, containerScreen }
                 }
             );
         }
