@@ -1,7 +1,6 @@
 ﻿// Piano Tiles Redux:
 // Made by tastyForReal (2022)
 
-using System;
 using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
@@ -18,65 +17,67 @@ using PianoTilesRedux.Game.Graphics.UserInterface;
 
 namespace PianoTilesRedux.Game.Screens.Select.Carousel
 {
-    public class LevelCarousel : Container
+    public class LevelCarousel : SafeAreaDefiningContainer
     {
         public string Title { get; set; }
         public string Artist { get; set; }
         public string Source { get; set; }
         public string Difficulty { get; set; }
-        public string MusicId { get; set; }
 
-        private const float box_width = 520;
-        private const float box_height = 128;
-        private const float box_corner_radius = 24;
-        private const float card_width = 84;
+        public int Stars { get; set; }
 
-        private const int fade_duration = 250;
+        private const float width = 520;
+        private const float height = 128;
+        private const float radius = 24;
+        private const float cover_width = 84;
 
-        private readonly Color4 card_bg_color = Color4Extensions.FromHex("#F9B130");
-        private readonly Color4 card_fg_color = Color4Extensions.FromHex("#FBD034");
-        private readonly Color4 starcrown_uncounted_color = Color4Extensions.FromHex("#E0EAF4");
-        private readonly Color4 starcrown_counted_color = Color4Extensions.FromHex("#FFC82E");
+        private readonly Color4 unlocked_bg_color = Color4Extensions.FromHex("#F9B130");
+        private readonly Color4 unlocked_fg_color = Color4Extensions.FromHex("#FBD034");
+
+        private readonly Color4 unachieved_color = Color4Extensions.FromHex("#E0EAF4");
+        private readonly Color4 achieved_color = Color4Extensions.FromHex("#FFC82E");
+
         private readonly Color4 title_color = Color4Extensions.FromHex("#214962");
         private readonly Color4 artist_color = Color4Extensions.FromHex("#ACC2CE");
 
-        private Texture starTexture;
-        private Texture crownTexture;
-        private Texture starTextureInCard;
-        private Texture crownTextureInCard;
+        private Box whiteBackground;
 
-        private int totalStars;
-        private FillFlowContainer<Sprite> stars;
+        private Texture playerStar;
+        private Texture playerCrown;
+        private FillFlowContainer<Sprite> containerStars;
 
-        private Sprite levelCard;
+        private Texture coverStar;
+        private Texture coverCrown;
 
-        public string Index;
-        public SpriteText LevelNumber;
+        private Box coverBackground;
+        private Sprite coverForeground;
+        private Container cover;
 
-        private SpriteText musicArtistText;
-        private SpriteText musicTitleText;
-        private Box boxCard;
-        private Container container;
-        private Box boxCoverCard;
+        private SpriteText artistText;
+        private SpriteText titleText;
+        private Container containerTitle;
+        private Container containerArtist;
+        private FillFlowContainer<Container> containerHeading;
+
+        private readonly Vector2 buttonSize = new Vector2(150, 50);
         private ReduxButton playButton;
 
-        [BackgroundDependencyLoader]
-        private void load(TextureStore textures)
-        {
-            starTexture = textures.Get("StarTexture");
-            crownTexture = textures.Get("CrownTexture");
-            starTextureInCard = textures.Get("StarTextureInCard");
-            crownTextureInCard = textures.Get("CrownTextureInCard");
+        private readonly int levelNumber;
+        private SpriteText numberText;
 
-            RelativeSizeAxes = Axes.X;
+        public LevelCarousel(int levelNumber)
+        {
+            this.levelNumber = levelNumber;
+
+            Name = "Level Carousel";
+
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
 
-            Width = box_width / PianoTilesReduxGame.SCREEN_WIDTH;
-            Height = box_height;
+            Size = new Vector2(width, height);
 
             Masking = true;
-            CornerRadius = box_corner_radius;
+            CornerRadius = radius;
 
             EdgeEffect = new EdgeEffectParameters
             {
@@ -85,66 +86,113 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
                 Offset = new Vector2(0, 4),
                 Radius = 8,
             };
+        }
 
-            boxCard = new Box
+        [BackgroundDependencyLoader]
+        private void load(TextureStore textures)
+        {
+            playerStar = textures.Get("StarTexture");
+            playerCrown = textures.Get("CrownTexture");
+
+            coverStar = textures.Get("StarForeground");
+            coverCrown = textures.Get("CrownForeground");
+
+            whiteBackground = new Box
             {
-                Name = "Box Card",
+                Name = "White Background",
                 RelativeSizeAxes = Axes.Both,
-                Anchor = Anchor.CentreLeft,
-                Origin = Anchor.CentreLeft,
-                Colour = card_bg_color
+                Colour = Color4.White
             };
 
-            musicTitleText = new SpriteText
+            containerTitle = new Container
             {
-                Name = "Music Title",
-                Width = 420,
-                Text = Title,
-                Colour = title_color,
+                Name = "Title",
+                AutoSizeAxes = Axes.Both,
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.TopLeft,
-                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
-                Padding = new MarginPadding { Left = 100, Top = 8 },
-                Truncate = true
+                Child = titleText =
+                    new SpriteText
+                    {
+                        Name = "Title Text",
+                        Text = Title,
+                        Colour = title_color,
+                        Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
+                        Width = 400,
+                        Truncate = true
+                    }
             };
 
-            musicArtistText = new SpriteText
+            containerArtist = new Container
             {
-                Name = "Music Artist",
-                Width = 420,
-                Text = Artist,
-                Colour = artist_color,
+                Name = "Artist",
+                AutoSizeAxes = Axes.Both,
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.TopLeft,
-                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
-                Padding = new MarginPadding { Left = 100, Top = 40 },
-                Truncate = true
+                Child = artistText =
+                    new SpriteText
+                    {
+                        Name = "Artist Text",
+                        Text = Artist,
+                        Colour = artist_color,
+                        Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
+                        Width = 400,
+                        Truncate = true
+                    }
             };
 
-            LevelNumber = new SpriteText
+            containerHeading = new FillFlowContainer<Container>
             {
-                Name = "Level Index",
-                Width = 64,
+                Name = "Level Heading",
+                RelativeSizeAxes = Axes.X,
+                AutoSizeAxes = Axes.Y,
+                Anchor = Anchor.TopLeft,
+                Origin = Anchor.TopLeft,
+                Margin = new MarginPadding { Left = 100, Top = 8 },
+                Direction = FillDirection.Vertical,
+                Children = new[] { containerTitle, containerArtist }
+            };
+
+            numberText = new SpriteText
+            {
+                Name = "Number",
                 Colour = Color4.White,
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.TopLeft,
                 Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
-                Padding = new MarginPadding { Left = 18, Top = 8 },
+                Margin = new MarginPadding { Left = 18, Top = 8 },
+                Width = cover_width - 18,
                 Truncate = true
             };
 
-            levelCard = new Sprite
+            coverBackground = new Box
             {
-                Name = "Level Card",
+                Name = "Cover Background",
+                RelativeSizeAxes = Axes.Both,
+                Anchor = Anchor.CentreLeft,
+                Origin = Anchor.CentreLeft,
+                Colour = unlocked_bg_color
+            };
+
+            coverForeground = new Sprite
+            {
+                Name = "Cover Foreground",
                 RelativeSizeAxes = Axes.Both,
                 Anchor = Anchor.BottomRight,
                 Origin = Anchor.BottomRight,
-                Colour = card_fg_color,
+                Colour = unlocked_fg_color,
                 FillMode = FillMode.Fit,
                 Scale = new Vector2(0.75f),
             };
 
-            stars = new FillFlowContainer<Sprite>
+            cover = new Container
+            {
+                Name = "Cover",
+                RelativeSizeAxes = Axes.Y,
+                Width = cover_width,
+                Children = new Drawable[] { coverBackground, coverForeground, numberText }
+            };
+
+            containerStars = new FillFlowContainer<Sprite>
             {
                 Name = "Stars",
                 RelativeSizeAxes = Axes.Both,
@@ -153,80 +201,69 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
                 Direction = FillDirection.Horizontal,
                 Spacing = new Vector2(4, 0),
                 Margin = new MarginPadding { Left = 102, Bottom = 10 },
-                ChildrenEnumerable = Enumerable.Range(0, 3).Select(_ => createStar())
+                Children = new[] { star, star, star }
             };
-
-            container = new Container
-            {
-                RelativeSizeAxes = Axes.Both,
-                Width = card_width / box_width,
-                Children = new Drawable[] { boxCard, LevelNumber, musicTitleText, musicArtistText, levelCard, stars, }
-            };
-
-            boxCoverCard = new Box { RelativeSizeAxes = Axes.Both, Colour = Color4.White };
 
             playButton = new ReduxButton
             {
                 Name = "Play Button",
                 Enabled = { Value = true },
-                Size = new Vector2(150, 50),
+                Size = buttonSize,
                 Anchor = Anchor.BottomRight,
                 Origin = Anchor.BottomRight,
                 Margin = new MarginPadding { Right = 15, Bottom = 10 },
                 Masking = true,
                 CornerRadius = 24,
                 FontUsage = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 36),
-                Label = "Play",
-                Action = () => totalStars = Math.Clamp(++totalStars, 0, 6)
+                Label = "Play"
             };
 
-            Children = new Drawable[] { boxCoverCard, container, playButton };
+            Children = new Drawable[] { whiteBackground, cover, containerHeading, containerStars, playButton };
         }
 
-        private Sprite createStar()
-        {
-            return new Sprite
+        private Sprite star =>
+            new Sprite
             {
+                Name = "Star",
                 RelativeSizeAxes = Axes.Both,
                 Anchor = Anchor.BottomLeft,
                 Origin = Anchor.BottomLeft,
                 FillMode = FillMode.Fit,
                 Size = new Vector2(0.4f)
             };
-        }
 
         private void updateStars()
         {
-            foreach (var star in stars)
+            foreach (var star in containerStars)
             {
-                _ = star.FadeColour(starcrown_uncounted_color, fade_duration, Easing.OutQuint);
+                star.Colour = unachieved_color;
             }
 
-            int starsCollected = totalStars % 4;
+            int starsCollected = Stars % 4;
 
-            int crownsCollected = (totalStars % 4) + 1;
+            int crownsCollected = (Stars % 4) + 1;
 
-            int starsToTake = totalStars < 4 ? starsCollected : crownsCollected;
+            int starsToTake = Stars < 4 ? starsCollected : crownsCollected;
 
-            foreach (var star in stars.Take(starsToTake))
+            foreach (var star in containerStars.Take(starsToTake))
             {
-                _ = star.FadeColour(starcrown_counted_color, fade_duration, Easing.OutQuint);
+                star.Colour = achieved_color;
             }
 
-            if (totalStars >= 4)
+            if (Stars >= 4)
             {
-                levelCard.Texture = crownTextureInCard;
-                foreach (var star in stars)
+                coverForeground.Texture = coverCrown;
+                foreach (var star in containerStars)
                 {
-                    star.Texture = crownTexture;
+                    star.Texture = playerCrown;
                 }
             }
             else
             {
-                levelCard.Texture = starTextureInCard;
-                foreach (var star in stars)
+                coverForeground.Texture = coverStar;
+                foreach (var star in containerStars)
                 {
-                    star.Texture = starTexture;
+                    star.Texture = playerStar;
                 }
             }
         }
@@ -235,7 +272,7 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
         {
             base.Update();
 
-            LevelNumber.Text = Index;
+            numberText.Text = levelNumber.ToString();
             updateStars();
         }
     }
