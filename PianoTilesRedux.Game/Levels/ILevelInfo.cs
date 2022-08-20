@@ -9,9 +9,9 @@ namespace PianoTilesRedux.Game.Levels
     public interface ILevelInfo
     {
         /// <summary>
-        /// The unique identifier of the level.
+        /// The index of the level. Used for ordering levels.
         /// </summary>
-        int Id { get; }
+        int Id { get; set; }
 
         /// <summary>
         /// The name of the song.
