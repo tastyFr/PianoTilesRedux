@@ -13,7 +13,7 @@ namespace PianoTilesRedux.Game.Levels
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
         [JsonProperty("artist")]
