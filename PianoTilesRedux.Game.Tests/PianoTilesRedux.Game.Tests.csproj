@@ -11,4 +11,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.json" />
+  </ItemGroup>
 </Project>

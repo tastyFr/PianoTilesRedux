@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "This title has an implausibly long title that will overflow",
+    "artist": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "source": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "difficulty": "Hard",
+    "bpms": [1, 2, 3]
+  },
+  {
+    "id": 2,
+    "title": "Goodbye To A World",
+    "artist": "Porter Robinson",
+    "source": "https://open.spotify.com/track/786ymAh5BmHoIpvjyrvjXk?si=de032fbea6a34edc",
+    "difficulty": "Medium",
+    "bpms": [3, 2, 1]
+  }
+]
