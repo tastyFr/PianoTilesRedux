@@ -20,5 +20,14 @@ namespace PianoTilesRedux.Game.Tests.Visual
 
             AddGame(game);
         }
+
+        /// <summary>
+        /// Asserts that the game's state is loaded.
+        /// </summary>
+        [Test]
+        public void TestGameStateLoaded()
+        {
+            Assert.IsTrue(game.IsLoaded);
+        }
     }
 }
