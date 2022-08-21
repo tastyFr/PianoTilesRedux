@@ -193,7 +193,7 @@
   </ItemGroup>
   <ItemGroup Label="Package References">
     <PackageReference Include="ppy.osu.Framework" Version="2022.816.0" />
-    <PackageReference Include="ppy.osu.Framework.iOS" Version="2022.816.0" />
+    <PackageReference Include="ppy.osu.Framework.iOS" Version="2022.819.0" />
   </ItemGroup>
   <ItemGroup Label="Transitive Dependencies">
     <PackageReference
