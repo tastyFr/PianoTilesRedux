@@ -7,7 +7,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.IO.Stores;
 using osu.Framework.Screens;
