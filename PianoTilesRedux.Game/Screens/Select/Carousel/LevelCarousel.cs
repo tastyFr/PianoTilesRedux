@@ -104,22 +104,33 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
                 Colour = Color4.White
             };
 
+            titleText = new SpriteText
+            {
+                Name = "Title Text",
+                Text = Title,
+                Colour = title_color,
+                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
+                Width = 400,
+                Truncate = true
+            };
+
+            artistText = new SpriteText
+            {
+                Name = "Artist Text",
+                Text = Artist,
+                Colour = artist_color,
+                Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
+                Width = 400,
+                Truncate = true
+            };
+
             containerTitle = new Container
             {
                 Name = "Title",
                 AutoSizeAxes = Axes.Both,
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.TopLeft,
-                Child = titleText =
-                    new SpriteText
-                    {
-                        Name = "Title Text",
-                        Text = Title,
-                        Colour = title_color,
-                        Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 32),
-                        Width = 400,
-                        Truncate = true
-                    }
+                Child = titleText
             };
 
             containerArtist = new Container
@@ -128,16 +139,7 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
                 AutoSizeAxes = Axes.Both,
                 Anchor = Anchor.TopLeft,
                 Origin = Anchor.TopLeft,
-                Child = artistText =
-                    new SpriteText
-                    {
-                        Name = "Artist Text",
-                        Text = Artist,
-                        Colour = artist_color,
-                        Font = ReduxFont.GetFont(typeface: Typeface.FuturaCondensed, size: 24),
-                        Width = 400,
-                        Truncate = true
-                    }
+                Child = artistText
             };
 
             containerHeading = new FillFlowContainer<Container>
@@ -234,9 +236,9 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
 
         private void updateStars()
         {
-            foreach (var star in containerStars)
+            foreach (var s in containerStars)
             {
-                star.Colour = unachieved_color;
+                s.Colour = unachieved_color;
             }
 
             int starsCollected = Stars % 4;
@@ -245,25 +247,25 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
 
             int starsToTake = Stars < 4 ? starsCollected : crownsCollected;
 
-            foreach (var star in containerStars.Take(starsToTake))
+            foreach (var s in containerStars.Take(starsToTake))
             {
-                star.Colour = achieved_color;
+                s.Colour = achieved_color;
             }
 
             if (Stars >= 4)
             {
                 coverForeground.Texture = coverCrown;
-                foreach (var star in containerStars)
+                foreach (var s in containerStars)
                 {
-                    star.Texture = playerCrown;
+                    s.Texture = playerCrown;
                 }
             }
             else
             {
                 coverForeground.Texture = coverStar;
-                foreach (var star in containerStars)
+                foreach (var s in containerStars)
                 {
-                    star.Texture = playerStar;
+                    s.Texture = playerStar;
                 }
             }
         }

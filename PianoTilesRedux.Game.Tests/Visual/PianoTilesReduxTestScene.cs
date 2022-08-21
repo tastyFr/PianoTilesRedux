@@ -14,12 +14,12 @@ namespace PianoTilesRedux.Game.Tests.Visual
 
         private class PianoTilesReduxTestSceneTestRunner : PianoTilesReduxGameBase, ITestSceneTestRunner
         {
-            private TestSceneTestRunner.TestRunner runner;
+            private readonly TestSceneTestRunner.TestRunner runner = new();
 
             protected override void LoadAsyncComplete()
             {
                 base.LoadAsyncComplete();
-                Add(runner = new TestSceneTestRunner.TestRunner());
+                Add(runner);
             }
 
             public void RunTestBlocking(TestScene test)

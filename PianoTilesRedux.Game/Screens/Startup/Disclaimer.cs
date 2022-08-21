@@ -56,6 +56,16 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 }
             };
 
+            disclaimerText = new TextFlowContainer
+            {
+                RelativeSizeAxes = Axes.X,
+                AutoSizeAxes = Axes.Y,
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Padding = new MarginPadding(padding),
+                TextAnchor = Anchor.Centre,
+            };
+
             disclaimerContent = new FillFlowContainer
             {
                 RelativeSizeAxes = Axes.X,
@@ -64,19 +74,7 @@ namespace PianoTilesRedux.Game.Screens.Startup
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Width = 0.9f,
-                Children = new Drawable[]
-                {
-                    containerWarningIcon,
-                    disclaimerText = new TextFlowContainer
-                    {
-                        RelativeSizeAxes = Axes.X,
-                        AutoSizeAxes = Axes.Y,
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Padding = new MarginPadding(padding),
-                        TextAnchor = Anchor.Centre,
-                    }
-                }
+                Children = new Drawable[] { containerWarningIcon, disclaimerText }
             };
 
             tapToContinue = new SpriteText

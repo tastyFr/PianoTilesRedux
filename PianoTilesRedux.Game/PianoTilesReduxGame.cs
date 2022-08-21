@@ -37,23 +37,21 @@ namespace PianoTilesRedux.Game
                 Child = new ScreenStack(new Disclaimer()) { RelativeSizeAxes = Axes.Both }
             };
 
-            base.AddInternal(
-                container = new Container
-                {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Size = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
-                    Children = new Drawable[] { box, containerScreen }
-                }
-            );
+            container = new Container
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Size = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
+                Children = new Drawable[] { box, containerScreen }
+            };
+
+            base.AddInternal(container);
         }
 
         protected override void Update()
         {
             base.Update();
 
-            // Update the safe area container's size to match the current screen
-            // size in portrait mode.
             var newSize = new Vector2(BoundingBox.Width, BoundingBox.Height);
             container.Size = new Vector2(Math.Min(newSize.Y / 16f * 9f, newSize.X), newSize.Y);
         }

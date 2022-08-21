@@ -23,18 +23,12 @@ namespace PianoTilesRedux.Game.Graphics
         )
         {
             string familyString = GetFamilyString(typeface);
-            return new FontUsage(
-                familyString,
-                size,
-                GetWeightString(familyString, weight),
-                getItalics(in italics),
-                fixedWidth
-            );
+            return new FontUsage(familyString, size, GetWeightString(familyString, weight), getItalics(), fixedWidth);
         }
 
         // Fredoka and FuturaCondensed don't support italics, so we just return
         // false for now.
-        private static bool getItalics(in bool italics)
+        private static bool getItalics()
         {
             return false;
         }
@@ -60,11 +54,17 @@ namespace PianoTilesRedux.Game.Graphics
         /// </summary>
         public static string GetWeightString(string family, FontWeight weight)
         {
-            return family == GetFamilyString(Typeface.Fredoka) && weight == FontWeight.Black
-                ? FontWeight.Regular.ToString()
-                : family == GetFamilyString(Typeface.FuturaCondensed) && weight != FontWeight.Regular
-                    ? FontWeight.Regular.ToString()
-                    : weight.ToString();
+            if (family == GetFamilyString(Typeface.Fredoka) && weight == FontWeight.Black)
+            {
+                return FontWeight.Regular.ToString();
+            }
+
+            if (family == GetFamilyString(Typeface.FuturaCondensed) && weight != FontWeight.Regular)
+            {
+                return FontWeight.Regular.ToString();
+            }
+
+            return weight.ToString();
         }
     }
 

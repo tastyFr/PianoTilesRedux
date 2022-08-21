@@ -17,20 +17,23 @@ namespace PianoTilesRedux.Game.Screens.Select
         private SpriteText comingSoonText;
 
         /// <summary>
-        /// A <see cref="FillFlowContainer{T}"/> which contains <see cref="LevelCarousel"/>s.
+        /// A <see cref="FillFlowContainer{T}"/> which contains <see
+        /// cref="LevelCarousel"/>s.
         /// </summary>
         public FillFlowContainer Levels { get; set; }
 
         [BackgroundDependencyLoader]
         private void load()
         {
+            comingSoonText = new ComingSoonText();
+
             Levels = new FillFlowContainer
             {
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
                 Direction = FillDirection.Vertical,
                 Spacing = new Vector2(0, 10),
-                Child = comingSoonText = new ComingSoonText()
+                Child = comingSoonText
             };
 
             InternalChildren = new Drawable[]
@@ -49,7 +52,8 @@ namespace PianoTilesRedux.Game.Screens.Select
             }
 
             _ = Levels.Remove(comingSoonText);
-            Levels.Add(comingSoonText = new ComingSoonText());
+            comingSoonText = new ComingSoonText();
+            Levels.Add(comingSoonText);
         }
     }
 }

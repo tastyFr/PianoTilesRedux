@@ -25,13 +25,15 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
         protected Box Background;
         protected SpriteText SpriteText;
 
-        protected virtual SpriteText Text =>
-            new SpriteText
+        protected virtual SpriteText CreateText()
+        {
+            return new SpriteText
             {
                 Origin = Anchor.Centre,
                 Anchor = Anchor.Centre,
                 Font = FontUsage
             };
+        }
 
         /// <summary>
         /// The text that is displayed on the button.
@@ -153,16 +155,15 @@ namespace PianoTilesRedux.Game.Graphics.UserInterface
 
         public ReduxButton()
         {
+            Background = new Box { RelativeSizeAxes = Axes.Both, Colour = BackgroundColour };
+            SpriteText = CreateText();
+
             InternalChild = Content = new Container
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 RelativeSizeAxes = Axes.Both,
-                Children = new Drawable[]
-                {
-                    Background = new Box { RelativeSizeAxes = Axes.Both, Colour = BackgroundColour },
-                    SpriteText = Text
-                }
+                Children = new Drawable[] { Background, SpriteText }
             };
         }
     }

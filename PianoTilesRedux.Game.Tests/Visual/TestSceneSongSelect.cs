@@ -25,48 +25,26 @@ namespace PianoTilesRedux.Game.Tests.Visual
 
         private readonly List<ILevelInfo> levels = new();
 
-        private readonly ScreenStack screenStack;
-        private SongSelect songSelect;
+        private readonly ScreenStack screenStack = new();
+        private readonly SongSelect songSelect = new();
 
         public TestSceneSongSelect()
         {
-            Add(screenStack = new());
+            Add(screenStack);
         }
 
         [BackgroundDependencyLoader]
         private void load()
         {
             resources = new(new DllResourceStore(TestResources.ResourceAssembly));
-            screenStack.Push(songSelect = new());
+            screenStack.Push(songSelect);
         }
 
         [Test]
         public void TestLoaded()
         {
-            Assert.AreEqual(songSelect.LoadState, LoadState.Loaded);
-            Assert.IsTrue(resources.GetAvailableResources().Any());
-        }
-
-        private void deserializeAndAddLevels()
-        {
-            levels.Clear();
-            Assert.IsEmpty(levels);
-
-            using var level = resources.GetStream("Resources/Levels.json");
-            string json = new StreamReader(level).ReadToEnd();
-            var levelsList = getLevelsList(json);
-
-            Assert.IsNotEmpty(levelsList);
-
-            foreach (var levelInfo in levelsList)
-            {
-                levels.Add(levelInfo);
-            }
-
-            for (int i = 0; i < levels.Count; i++)
-            {
-                Assert.AreEqual(i + 1, levels[i].Id, $"Level ID {i + 1} is not sequential");
-            }
+            Assert.IsTrue(songSelect.IsLoaded);
+            Assert.IsNotEmpty(resources.GetAvailableResources());
         }
 
         [Test]
@@ -93,6 +71,28 @@ namespace PianoTilesRedux.Game.Tests.Visual
             AddAssert("levels added", () => songSelect.Levels.OfType<LevelCarousel>().Any());
 
             AddAssert("last level is SpriteText", () => songSelect.Levels[^1] is SpriteText);
+        }
+
+        private void deserializeAndAddLevels()
+        {
+            levels.Clear();
+            Assert.IsEmpty(levels);
+
+            using var level = resources.GetStream("Resources/Levels.json");
+            string json = new StreamReader(level).ReadToEnd();
+            var levelsList = getLevelsList(json);
+
+            Assert.IsNotEmpty(levelsList);
+
+            foreach (var levelInfo in levelsList)
+            {
+                levels.Add(levelInfo);
+            }
+
+            for (int i = 0; i < levels.Count; i++)
+            {
+                Assert.AreEqual(i + 1, levels[i].Id, $"Level ID {i + 1} is not sequential");
+            }
         }
 
         private void addLevel(int level, string title, string artist)
