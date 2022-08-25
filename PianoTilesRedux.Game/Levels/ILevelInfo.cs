@@ -31,7 +31,7 @@ namespace PianoTilesRedux.Game.Levels
         /// <summary>
         /// How difficult the song is.
         /// </summary>
-        string Difficulty { get; set; }
+        Difficulty Difficulty { get; set; }
 
         /// <summary>
         /// The BPMs of three divided parts of the song.

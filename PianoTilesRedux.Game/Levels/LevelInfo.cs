@@ -23,7 +23,7 @@ namespace PianoTilesRedux.Game.Levels
         public string Source { get; set; }
 
         [JsonProperty("difficulty")]
-        public string Difficulty { get; set; }
+        public Difficulty Difficulty { get; set; }
 
         [JsonProperty("bpms")]
         public float[] Bpms { get; set; }
