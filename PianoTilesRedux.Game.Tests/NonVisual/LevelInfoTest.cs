@@ -13,6 +13,7 @@ namespace PianoTilesRedux.Game.Tests.NonVisual
     [HeadlessTest]
     public class LevelInfoTest
     {
+        private const string filename = "LittleStar.json";
         private readonly TemporaryNativeStorage storage;
         private readonly LevelInfo levelInfo;
 
@@ -34,7 +35,7 @@ namespace PianoTilesRedux.Game.Tests.NonVisual
 
         private void serialize()
         {
-            using var stream = storage.CreateFileSafely("LittleStar.json");
+            using var stream = storage.CreateFileSafely(filename);
             using var writer = new StreamWriter(stream);
             writer.WriteLine(JsonConvert.SerializeObject(levelInfo));
         }
@@ -44,7 +45,7 @@ namespace PianoTilesRedux.Game.Tests.NonVisual
         {
             Assert.DoesNotThrow(serialize);
 
-            using var reader = new StreamReader(storage.GetStream("LittleStar.json"));
+            using var reader = new StreamReader(storage.GetStream(filename));
             Assert.NotNull(reader);
 
             string value = reader.ReadToEnd();
