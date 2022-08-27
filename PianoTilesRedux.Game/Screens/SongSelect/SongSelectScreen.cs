@@ -4,21 +4,20 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK;
 using PianoTilesRedux.Game.Graphics.Containers;
-using PianoTilesRedux.Game.Screens.Select.Carousel;
+using PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel;
 
-namespace PianoTilesRedux.Game.Screens.Select
+namespace PianoTilesRedux.Game.Screens.SongSelect
 {
-    public class SongSelect : Screen
+    public class SongSelectScreen : Screen
     {
-        private SpriteText comingSoonText;
+        private ComingSoonText comingSoonText;
 
         /// <summary>
         /// A <see cref="FillFlowContainer{T}"/> which contains <see
-        /// cref="LevelCarousel"/>s.
+        /// cref="DrawableLevelCarousel"/>s.
         /// </summary>
         public FillFlowContainer Levels { get; set; }
 

@@ -7,27 +7,27 @@ using System.Linq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics.Sprites;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.IO.Stores;
 using osu.Framework.Screens;
 using PianoTilesRedux.Game.Levels;
-using PianoTilesRedux.Game.Screens.Select;
-using PianoTilesRedux.Game.Screens.Select.Carousel;
+using PianoTilesRedux.Game.Screens.SongSelect;
+using PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel;
 using PianoTilesRedux.Game.Tests.Resources;
 
-namespace PianoTilesRedux.Game.Tests.Visual
+namespace PianoTilesRedux.Game.Tests.Visual.SongSelect
 {
     [TestFixture]
-    public class TestSceneSongSelect : PianoTilesReduxTestScene
+    public class TestSceneSongSelectScreen : PianoTilesReduxTestScene
     {
         private ResourceStore<byte[]> resources = null!;
 
         private readonly List<ILevelInfo> levels = new();
 
         private readonly ScreenStack screenStack = new();
-        private readonly SongSelect songSelect = new();
+        private readonly SongSelectScreen songSelect = new();
 
-        public TestSceneSongSelect()
+        public TestSceneSongSelectScreen()
         {
             Add(screenStack);
         }
@@ -40,40 +40,36 @@ namespace PianoTilesRedux.Game.Tests.Visual
         }
 
         [Test]
-        public void TestLoaded()
-        {
-            Assert.IsTrue(songSelect.IsLoaded);
-            Assert.IsNotEmpty(resources.GetAvailableResources());
-        }
-
-        [Test]
         public void TestAddLevels()
         {
-            _ = AddStep("deserialize and add levels", () => deserializeAndAddLevels());
+            _ = AddStep("deserialize", () => deserialize());
 
-            AddUntilStep("check if levels were added", () => levels.Any());
+            AddUntilStep("wait for levels to add", () => levels.Any());
 
             _ = AddStep("clear levels", () => songSelect.Levels.Clear());
 
-            AddAssert("no levels", () => !songSelect.Levels.OfType<LevelCarousel>().Any());
+            AddAssert("empty levels", () => !songSelect.Levels.OfType<DrawableLevelCarousel>().Any());
 
             _ = AddStep(
-                $"add first level",
-                () => addLevel(levels.First().Id, levels.First().Title, levels.First().Artist)
+                "add levels",
+                () =>
+                {
+                    foreach (var level in levels)
+                    {
+                        addLevel(level.Id, level.Title, level.Artist);
+                    }
+                }
             );
 
-            _ = AddStep(
-                $"add last level",
-                () => addLevel(levels.Last().Id, levels.Last().Title, levels.Last().Artist)
-            );
+            AddAssert("levels added", () => songSelect.Levels.OfType<DrawableLevelCarousel>().Any());
 
-            AddAssert("levels added", () => songSelect.Levels.OfType<LevelCarousel>().Any());
-
-            AddAssert("last level is SpriteText", () => songSelect.Levels[^1] is SpriteText);
+            AddAssert("last level type is Container", () => songSelect.Levels[^1] is Container);
         }
 
-        private void deserializeAndAddLevels()
+        private void deserialize()
         {
+            Assert.IsNotEmpty(resources.GetAvailableResources());
+
             levels.Clear();
             Assert.IsEmpty(levels);
 
@@ -96,7 +92,7 @@ namespace PianoTilesRedux.Game.Tests.Visual
 
         private void addLevel(int level, string title, string artist)
         {
-            songSelect.Levels.Add(new LevelCarousel(level) { Title = title, Artist = artist });
+            songSelect.Levels.Add(new DrawableLevelCarousel(level) { Title = title, Artist = artist });
         }
 
         private static List<LevelInfo> getLevelsList(string json)

@@ -15,9 +15,9 @@ using osuTK.Graphics;
 using PianoTilesRedux.Game.Graphics;
 using PianoTilesRedux.Game.Graphics.UserInterface;
 
-namespace PianoTilesRedux.Game.Screens.Select.Carousel
+namespace PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel
 {
-    public class LevelCarousel : SafeAreaDefiningContainer
+    public class DrawableLevelCarousel : Container
     {
         public string Title { get; set; }
         public string Artist { get; set; }
@@ -30,15 +30,17 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
         private const float height = 128;
         private const float radius = 24;
         private const float cover_width = 84;
+        private const float button_width = 150;
+        private const float button_height = 50;
 
-        private readonly Color4 unlocked_bg_color = Color4Extensions.FromHex("#F9B130");
-        private readonly Color4 unlocked_fg_color = Color4Extensions.FromHex("#FBD034");
+        private static readonly Color4 unlocked_bg_color = Color4Extensions.FromHex("#F9B130");
+        private static readonly Color4 unlocked_fg_color = Color4Extensions.FromHex("#FBD034");
 
-        private readonly Color4 unachieved_color = Color4Extensions.FromHex("#E0EAF4");
-        private readonly Color4 achieved_color = Color4Extensions.FromHex("#FFC82E");
+        private static readonly Color4 unachieved_color = Color4Extensions.FromHex("#E0EAF4");
+        private static readonly Color4 achieved_color = Color4Extensions.FromHex("#FFC82E");
 
-        private readonly Color4 title_color = Color4Extensions.FromHex("#214962");
-        private readonly Color4 artist_color = Color4Extensions.FromHex("#ACC2CE");
+        private static readonly Color4 title_color = Color4Extensions.FromHex("#214962");
+        private static readonly Color4 artist_color = Color4Extensions.FromHex("#ACC2CE");
 
         private Box whiteBackground;
 
@@ -59,13 +61,12 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
         private Container containerArtist;
         private FillFlowContainer<Container> containerHeading;
 
-        private readonly Vector2 buttonSize = new Vector2(150, 50);
         private ReduxButton playButton;
 
         private readonly int levelNumber;
         private SpriteText numberText;
 
-        public LevelCarousel(int levelNumber)
+        public DrawableLevelCarousel(int levelNumber)
         {
             this.levelNumber = levelNumber;
 
@@ -210,7 +211,7 @@ namespace PianoTilesRedux.Game.Screens.Select.Carousel
             {
                 Name = "Play Button",
                 Enabled = { Value = true },
-                Size = buttonSize,
+                Size = new Vector2(button_width, button_height),
                 Anchor = Anchor.BottomRight,
                 Origin = Anchor.BottomRight,
                 Margin = new MarginPadding { Right = 15, Bottom = 10 },
