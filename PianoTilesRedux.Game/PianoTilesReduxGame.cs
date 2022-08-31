@@ -21,8 +21,8 @@ namespace PianoTilesRedux.Game
         private Box box;
         private DrawSizePreservingFillContainer containerScreen;
 
-        public const float SCREEN_WIDTH = 540;
-        public const float SCREEN_HEIGHT = 960;
+        public const float DESIGN_WIDTH = 540;
+        public const float DESIGN_HEIGHT = 960;
 
         [BackgroundDependencyLoader]
         private void load()
@@ -33,7 +33,7 @@ namespace PianoTilesRedux.Game
 
             containerScreen = new DrawSizePreservingFillContainer
             {
-                TargetDrawSize = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
+                TargetDrawSize = new Vector2(DESIGN_WIDTH, DESIGN_HEIGHT),
                 Child = new ScreenStack(new Disclaimer()) { RelativeSizeAxes = Axes.Both }
             };
 
@@ -41,7 +41,7 @@ namespace PianoTilesRedux.Game
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Size = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT),
+                Size = new Vector2(DESIGN_WIDTH, DESIGN_HEIGHT),
                 Children = new Drawable[] { box, containerScreen }
             };
 
