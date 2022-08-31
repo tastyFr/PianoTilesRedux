@@ -32,9 +32,9 @@ namespace PianoTilesRedux.Game.Graphics.Miscellaneous
             base.Update();
 
             var size = Texture.Size;
-            double aspectRatio = size.X / size.Y;
+            float aspectRatio = size.X / size.Y;
 
-            Width = (float)Math.Ceiling(DrawHeight * aspectRatio);
+            Width = MathF.Ceiling(DrawHeight * aspectRatio);
         }
     }
 }
