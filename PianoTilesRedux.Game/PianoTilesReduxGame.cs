@@ -16,13 +16,15 @@ namespace PianoTilesRedux.Game
 {
     public class PianoTilesReduxGame : PianoTilesReduxGameBase
     {
+        private const float design_width = 540;
+        private const float design_height = 960;
+
         private Container container;
 
         private Box box;
         private DrawSizePreservingFillContainer containerScreen;
 
-        public const float DESIGN_WIDTH = 540;
-        public const float DESIGN_HEIGHT = 960;
+        public static Vector2 DesignResolution => new Vector2(design_width, design_height);
 
         [BackgroundDependencyLoader]
         private void load()
@@ -33,7 +35,7 @@ namespace PianoTilesRedux.Game
 
             containerScreen = new DrawSizePreservingFillContainer
             {
-                TargetDrawSize = new Vector2(DESIGN_WIDTH, DESIGN_HEIGHT),
+                TargetDrawSize = DesignResolution,
                 Child = new ScreenStack(new Disclaimer()) { RelativeSizeAxes = Axes.Both }
             };
 
@@ -41,7 +43,7 @@ namespace PianoTilesRedux.Game
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
-                Size = new Vector2(DESIGN_WIDTH, DESIGN_HEIGHT),
+                Size = DesignResolution,
                 Children = new Drawable[] { box, containerScreen }
             };
 
@@ -52,7 +54,7 @@ namespace PianoTilesRedux.Game
         {
             base.Update();
 
-            var newSize = new Vector2(BoundingBox.Width, BoundingBox.Height);
+            var newSize = BoundingBox.Size;
             container.Size = new Vector2(Math.Min(newSize.Y / 16f * 9f, newSize.X), newSize.Y);
         }
     }
