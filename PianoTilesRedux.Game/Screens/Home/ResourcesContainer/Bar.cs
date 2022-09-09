@@ -7,8 +7,9 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
+using PianoTilesRedux.Game.Graphics;
 
-namespace PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay
+namespace PianoTilesRedux.Game.Screens.Home.ResourcesContainer
 {
     internal class Bar : Container
     {
@@ -57,13 +58,9 @@ namespace PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay
 
             whitebackground = new Box { Size = barsize, Colour = Colour4.White.Opacity(0.1f) };
 
-            bar.Add(whitebackground);
-            AddInternal(bar);
-
             if (bartype == BarType.Xp)
             {
                 bluebox = new Box { RelativeSizeAxes = Axes.Both, Colour = Colour4.FromHex(blue) };
-
                 lightbluebox = new Box { RelativeSizeAxes = Axes.Both, Colour = Colour4.FromHex(lightblue) };
 
                 xpbar = new CircularContainer
@@ -92,41 +89,51 @@ namespace PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay
                     Children = new Drawable[] { bluebox, valuetext }
                 };
 
-                bar.Add(xpbar);
-
-                AddInternal(bluecircle);
+                return;
             }
-            else
+
+            icon = new BarIcon(bartype)
             {
-                icon = new BarIcon(bartype)
-                {
-                    Anchor = Anchor.CentreLeft,
-                    Origin = Anchor.CentreLeft,
-                    Size = circlesize
-                };
+                Anchor = Anchor.CentreLeft,
+                Origin = Anchor.CentreLeft,
+                Size = circlesize
+            };
 
-                valuetext = new SpriteText
-                {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    Text = "1000",
-                    Font = ReduxFont.GetFont(Typeface.FuturaCondensed)
-                };
+            valuetext = new SpriteText
+            {
+                Anchor = Anchor.Centre,
+                Origin = Anchor.Centre,
+                Text = "1000",
+                Font = ReduxFont.GetFont(Typeface.FuturaCondensed)
+            };
 
-                plus = new SpriteIcon
-                {
-                    Alpha = 0.5f,
-                    Size = new Vector2(12),
-                    Anchor = Anchor.CentreRight,
-                    Origin = Anchor.CentreRight,
-                    Margin = new MarginPadding { Right = 8 },
-                    Icon = FontAwesome.Solid.Plus
-                };
+            plus = new SpriteIcon
+            {
+                Alpha = 0.5f,
+                Size = new Vector2(12),
+                Anchor = Anchor.CentreRight,
+                Origin = Anchor.CentreRight,
+                Margin = new MarginPadding { Right = 8 },
+                Icon = FontAwesome.Solid.Plus
+            };
+        }
 
-                bar.AddRange(new Drawable[] { valuetext, plus });
+        protected override void LoadComplete()
+        {
+            base.LoadComplete();
 
-                AddInternal(icon);
+            bar.Add(whitebackground);
+            AddInternal(bar);
+
+            if (bartype == BarType.Xp)
+            {
+                bar.Add(xpbar);
+                AddInternal(bluecircle);
+                return;
             }
+
+            bar.AddRange(new Drawable[] { valuetext, plus });
+            AddInternal(icon);
         }
     }
 }
