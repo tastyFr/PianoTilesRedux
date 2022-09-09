@@ -46,6 +46,7 @@ namespace PianoTilesRedux.Game.Tests.Visual.Home
         {
             inputManager.MoveMouseTo(navigation.Children[c].ScreenSpaceDrawQuad.Centre);
             inputManager.Click(MouseButton.Left);
+            Scheduler.Add(() => inputManager.UseParentInput = true);
         }
     }
 }

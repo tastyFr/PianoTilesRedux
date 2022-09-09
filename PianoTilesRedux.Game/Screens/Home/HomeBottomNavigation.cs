@@ -47,7 +47,15 @@ namespace PianoTilesRedux.Game.Screens.Home
         protected override bool OnClick(ClickEvent e)
         {
             var position = e.ScreenSpaceMouseDownPosition;
-            var thisItem = (HomeNavigationItem)this.Single(item => item.ScreenSpaceDrawQuad.Centre == position);
+
+            var thisItem = (HomeNavigationItem)
+                this.Single(item =>
+                {
+                    bool mouseIsOverAnItem =
+                        item.ScreenSpaceDrawQuad.Contains(position) || item.ScreenSpaceDrawQuad.Centre == position;
+                    return mouseIsOverAnItem;
+                });
+
             select(thisItem);
             return base.OnClick(e);
         }
