@@ -59,12 +59,9 @@ namespace PianoTilesRedux.Game.Graphics
                 return FontWeight.Regular.ToString();
             }
 
-            if (family == GetFamilyString(Typeface.FuturaCondensed) && weight != FontWeight.Regular)
-            {
-                return FontWeight.Regular.ToString();
-            }
-
-            return weight.ToString();
+            return family == GetFamilyString(Typeface.FuturaCondensed) && weight != FontWeight.Regular
+                ? FontWeight.Regular.ToString()
+                : weight.ToString();
         }
     }
 
