@@ -4,6 +4,7 @@
 using System.Drawing;
 using osu.Framework.Allocation;
 using osu.Framework.Configuration;
+using osu.Framework.Graphics.Textures;
 using osu.Framework.IO.Stores;
 using PianoTilesRedux.Resources;
 
@@ -11,11 +12,25 @@ namespace PianoTilesRedux.Game
 {
     public class PianoTilesReduxGameBase : osu.Framework.Game
     {
+        private DependencyContainer dependencies;
+
+        protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent)
+        {
+            return dependencies = new DependencyContainer(base.CreateChildDependencies(parent));
+        }
+
         [BackgroundDependencyLoader]
         private void load(FrameworkConfigManager config)
         {
             using var store = new DllResourceStore(typeof(PianoTilesReduxResources).Assembly);
             Resources.AddStore(store);
+
+            using var largeStore = new LargeTextureStore(
+                Host.Renderer,
+                Host.CreateTextureLoaderStore(new NamespacedResourceStore<byte[]>(Resources, @"Textures"))
+            );
+            largeStore.AddTextureSource(Host.CreateTextureLoaderStore(new OnlineStore()));
+            dependencies.Cache(largeStore);
 
             // Always set these values at the start of the game.
             config.SetValue(FrameworkSetting.WindowedSize, new Size(1366, 768));
