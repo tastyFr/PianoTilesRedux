@@ -25,11 +25,10 @@ namespace PianoTilesRedux.Game
             using var store = new DllResourceStore(typeof(PianoTilesReduxResources).Assembly);
             Resources.AddStore(store);
 
-            using var largeStore = new LargeTextureStore(
-                Host.Renderer,
-                Host.CreateTextureLoaderStore(new NamespacedResourceStore<byte[]>(Resources, @"Textures"))
-            );
-            largeStore.AddTextureSource(Host.CreateTextureLoaderStore(new OnlineStore()));
+            using var resourceStore = new NamespacedResourceStore<byte[]>(Resources, @"Textures");
+            using var largeStore = new LargeTextureStore(Host.Renderer, Host.CreateTextureLoaderStore(resourceStore));
+            using var onlineStore = new OnlineStore();
+            largeStore.AddTextureSource(Host.CreateTextureLoaderStore(onlineStore));
             dependencies.Cache(largeStore);
 
             // Always set these values at the start of the game.
