@@ -45,13 +45,12 @@ namespace PianoTilesRedux.Game.Screens.SongSelect
         {
             base.Update();
 
-            if (comingSoonText == null)
+            if (comingSoonText.Parent == null)
             {
                 return;
             }
 
-            _ = Levels.Remove(comingSoonText);
-            comingSoonText = new ComingSoonText();
+            _ = Levels.Remove(comingSoonText, false);
             Levels.Add(comingSoonText);
         }
     }
