@@ -5,20 +5,20 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osuTK;
-using PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay;
+using PianoTilesRedux.Game.Screens.Home.ResourcesContainer;
 
-namespace PianoTilesRedux.Game.Graphics.Overlays
+namespace PianoTilesRedux.Game.Screens.Home
 {
-    public class PlayerResourcesOverlay : Container
+    public class PlayerResourcesContainer : Container
     {
-        private Bar xpBar;
-        private Bar livesBar;
-        private Bar goldBar;
-        private Bar diamondsBar;
+        private Bar xpBar,
+            livesBar,
+            goldBar,
+            diamondsBar;
 
         private FillFlowContainer fillFlowContainer;
 
-        public PlayerResourcesOverlay()
+        public PlayerResourcesContainer()
         {
             Anchor = Anchor.TopCentre;
             Origin = Anchor.TopCentre;
@@ -44,7 +44,11 @@ namespace PianoTilesRedux.Game.Graphics.Overlays
                 Spacing = new Vector2(10, 0),
                 Children = new[] { xpBar, livesBar, goldBar, diamondsBar }
             };
+        }
 
+        protected override void LoadComplete()
+        {
+            base.LoadComplete();
             AddInternal(fillFlowContainer);
         }
     }

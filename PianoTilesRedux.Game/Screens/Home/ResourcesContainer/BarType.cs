@@ -1,7 +1,7 @@
 ﻿// Piano Tiles Redux:
 // Made by tastyForReal (2022)
 
-namespace PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay
+namespace PianoTilesRedux.Game.Screens.Home.ResourcesContainer
 {
     internal enum BarType
     {

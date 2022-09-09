@@ -5,7 +5,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 
-namespace PianoTilesRedux.Game.Graphics.Overlays.ResourcesOverlay
+namespace PianoTilesRedux.Game.Screens.Home.ResourcesContainer
 {
     internal class BarIcon : Sprite
     {
