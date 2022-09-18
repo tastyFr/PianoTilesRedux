@@ -14,17 +14,20 @@ namespace PianoTilesRedux.Game.Tests.Visual.Home
     [TestFixture]
     public class TestSceneHomeBottomNavigation : PianoTilesReduxTestScene
     {
-        private HomeBottomNavigation navigation;
-        private ManualInputManager inputManager;
+        private readonly HomeBottomNavigation navigation;
+        private readonly ManualInputManager inputManager;
+
+        public TestSceneHomeBottomNavigation()
+        {
+            navigation = new();
+            inputManager = new() { Child = navigation };
+        }
 
         [BackgroundDependencyLoader]
         private void load()
         {
-            navigation = new();
-            inputManager = new() { Child = navigation };
             Add(inputManager);
-            navigation.OnUpdate += _ =>
-                Schedule(() => navigation.Scale = new Vector2(Content.DrawSize.X / navigation.DrawSize.X));
+            navigation.OnUpdate += d => Schedule(() => d.Scale = new Vector2(Content.DrawSize.X / d.DrawSize.X));
         }
 
         [Test]
