@@ -63,7 +63,7 @@ namespace PianoTilesRedux.Game.Tests.Visual.SongSelect
 
             AddAssert("levels added", () => songSelect.Levels.OfType<DrawableLevelCarousel>().Any());
 
-            AddAssert("last level type is Container", () => songSelect.Levels[^1] is Container);
+            AddAssert("last level type is ComingSoonText", () => songSelect.Levels[^1] is ComingSoonText);
         }
 
         private void deserialize()

@@ -31,8 +31,7 @@ namespace PianoTilesRedux.Game.Screens.SongSelect
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
                 Direction = FillDirection.Vertical,
-                Spacing = new Vector2(0, 10),
-                Child = comingSoonText
+                Spacing = new Vector2(0, 10)
             };
 
             InternalChildren = new Drawable[]
@@ -45,12 +44,8 @@ namespace PianoTilesRedux.Game.Screens.SongSelect
         {
             base.Update();
 
-            if (comingSoonText.Parent == null)
-            {
-                return;
-            }
-
             _ = Levels.Remove(comingSoonText, false);
+            comingSoonText = new ComingSoonText();
             Levels.Add(comingSoonText);
         }
     }
