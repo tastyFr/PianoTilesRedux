@@ -9,7 +9,7 @@ using PianoTilesRedux.Game.Graphics;
 
 namespace PianoTilesRedux.Game.Screens.SongSelect
 {
-    internal class ComingSoonText : Container
+    public class ComingSoonText : Container
     {
         private const float width = 520;
         private const float height = 128;
