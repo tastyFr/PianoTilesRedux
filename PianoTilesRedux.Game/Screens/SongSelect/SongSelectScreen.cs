@@ -15,10 +15,6 @@ namespace PianoTilesRedux.Game.Screens.SongSelect
     {
         private ComingSoonText comingSoonText;
 
-        /// <summary>
-        /// A <see cref="FillFlowContainer{T}"/> which contains <see
-        /// cref="DrawableLevelCarousel"/>s.
-        /// </summary>
         public FillFlowContainer Levels { get; set; }
 
         [BackgroundDependencyLoader]
