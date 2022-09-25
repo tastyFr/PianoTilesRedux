@@ -7,7 +7,6 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Screens;
 using osuTK;
 using PianoTilesRedux.Game.Graphics.Containers;
-using PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel;
 
 namespace PianoTilesRedux.Game.Screens.SongSelect
 {
