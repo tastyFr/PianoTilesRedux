@@ -33,14 +33,14 @@ namespace PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel
         private const float button_width = 150;
         private const float button_height = 50;
 
-        private static readonly Color4 unlocked_bg_color = Color4Extensions.FromHex("#F9B130");
-        private static readonly Color4 unlocked_fg_color = Color4Extensions.FromHex("#FBD034");
+        private Color4 unlocked_bg_color => Color4Extensions.FromHex("#F9B130");
+        private Color4 unlocked_fg_color => Color4Extensions.FromHex("#FBD034");
 
-        private static readonly Color4 unachieved_color = Color4Extensions.FromHex("#E0EAF4");
-        private static readonly Color4 achieved_color = Color4Extensions.FromHex("#FFC82E");
+        private Color4 unachieved_color => Color4Extensions.FromHex("#E0EAF4");
+        private Color4 achieved_color => Color4Extensions.FromHex("#FFC82E");
 
-        private static readonly Color4 title_color = Color4Extensions.FromHex("#214962");
-        private static readonly Color4 artist_color = Color4Extensions.FromHex("#ACC2CE");
+        private Color4 title_color => Color4Extensions.FromHex("#214962");
+        private Color4 artist_color => Color4Extensions.FromHex("#ACC2CE");
 
         private Box whiteBackground;
 
@@ -243,30 +243,28 @@ namespace PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel
             }
 
             int starsCollected = Stars % 4;
-
             int crownsCollected = (Stars % 4) + 1;
+            int starsToTake = (Stars < 4) ? starsCollected : crownsCollected;
 
-            int starsToTake = Stars < 4 ? starsCollected : crownsCollected;
-
-            foreach (var s in containerStars.Take(starsToTake))
+            foreach (var s2 in containerStars.Take(starsToTake))
             {
-                s.Colour = achieved_color;
+                s2.Colour = achieved_color;
             }
 
             if (Stars >= 4)
             {
                 coverForeground.Texture = coverCrown;
-                foreach (var s in containerStars)
+                foreach (var s3 in containerStars)
                 {
-                    s.Texture = playerCrown;
+                    s3.Texture = playerCrown;
                 }
             }
             else
             {
                 coverForeground.Texture = coverStar;
-                foreach (var s in containerStars)
+                foreach (var s4 in containerStars)
                 {
-                    s.Texture = playerStar;
+                    s4.Texture = playerStar;
                 }
             }
         }
@@ -274,7 +272,6 @@ namespace PianoTilesRedux.Game.Screens.SongSelect.LevelCarousel
         protected override void Update()
         {
             base.Update();
-
             numberText.Text = levelNumber.ToString();
             updateStars();
         }
