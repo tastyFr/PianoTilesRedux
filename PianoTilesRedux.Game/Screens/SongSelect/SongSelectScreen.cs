@@ -31,22 +31,28 @@ namespace PianoTilesRedux.Game.Screens.SongSelect
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
                 Direction = FillDirection.Vertical,
-                Spacing = new Vector2(0, 10)
+                Spacing = new Vector2(0, 10),
+                Child = comingSoonText
             };
 
-            InternalChildren = new Drawable[]
+            InternalChild = new ReduxScrollContainer { RelativeSizeAxes = Axes.Both, Child = Levels };
+
+            Levels.OnUpdate += d =>
             {
-                new ReduxScrollContainer { RelativeSizeAxes = Axes.Both, Child = Levels }
+                bool noSoonText = comingSoonText.Parent == null;
+                if (noSoonText)
+                {
+                    comingSoonText = new ComingSoonText();
+                    Levels.Add(comingSoonText);
+                }
+
+                var levels = Levels;
+                bool soonTextIsLast = levels[^1] is ComingSoonText;
+                if (!soonTextIsLast)
+                {
+                    _ = Levels.Remove(comingSoonText, false);
+                }
             };
-        }
-
-        protected override void Update()
-        {
-            base.Update();
-
-            _ = Levels.Remove(comingSoonText, false);
-            comingSoonText = new ComingSoonText();
-            Levels.Add(comingSoonText);
         }
     }
 }
