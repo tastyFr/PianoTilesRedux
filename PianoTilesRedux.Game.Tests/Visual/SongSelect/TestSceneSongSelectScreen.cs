@@ -7,7 +7,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using osu.Framework.Allocation;
-using osu.Framework.Graphics.Containers;
 using osu.Framework.IO.Stores;
 using osu.Framework.Screens;
 using PianoTilesRedux.Game.Levels;
@@ -82,11 +81,6 @@ namespace PianoTilesRedux.Game.Tests.Visual.SongSelect
             foreach (var levelInfo in levelsList)
             {
                 levels.Add(levelInfo);
-            }
-
-            for (int i = 0; i < levels.Count; i++)
-            {
-                Assert.AreEqual(i + 1, levels[i].Id, $"Level ID {i + 1} is not sequential");
             }
         }
 
