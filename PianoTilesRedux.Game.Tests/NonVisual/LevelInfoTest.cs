@@ -24,7 +24,7 @@ namespace PianoTilesRedux.Game.Tests.NonVisual
             levelInfo = new LevelInfo
             {
                 Id = 1,
-                Title = "Little Star",
+                Title = filename,
                 Artist = "Traditional",
                 Bpms = new float[3] { 85, 90, 94 },
                 Difficulty = Difficulty.VeryEasy,
