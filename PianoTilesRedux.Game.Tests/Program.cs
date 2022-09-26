@@ -2,7 +2,6 @@
 // Made by tastyForReal (2022)
 
 using osu.Framework;
-using osu.Framework.Platform;
 
 namespace PianoTilesRedux.Game.Tests
 {
@@ -10,8 +9,8 @@ namespace PianoTilesRedux.Game.Tests
     {
         public static void Main()
         {
-            using GameHost host = Host.GetSuitableDesktopHost("visual-tests");
-            using PianoTilesReduxTestBrowser game = new();
+            using var host = Host.GetSuitableDesktopHost("visual-tests");
+            using var game = new PianoTilesReduxTestBrowser();
             host.Run(game);
         }
     }

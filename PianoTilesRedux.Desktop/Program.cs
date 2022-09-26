@@ -2,7 +2,6 @@
 // Made by tastyForReal (2022)
 
 using osu.Framework;
-using osu.Framework.Platform;
 
 namespace PianoTilesRedux.Desktop
 {
@@ -10,8 +9,8 @@ namespace PianoTilesRedux.Desktop
     {
         public static void Main()
         {
-            using GameHost host = Host.GetSuitableDesktopHost("PianoTilesRedux");
-            using osu.Framework.Game game = new PianoTilesReduxGameDesktop();
+            using var host = Host.GetSuitableDesktopHost("PianoTilesRedux");
+            using var game = new PianoTilesReduxGameDesktop();
             host.Run(game);
         }
     }
